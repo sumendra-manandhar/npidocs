@@ -1,0 +1,37 @@
+.Toastify__toast {
+    background-color: #fff;
+    color: #000;
+    font-size: 0.833rem;
+    min-height: 42px;
+
+    &-container {
+        width: 400px;
+    }
+    
+    & .Toastify__progress-bar {
+        height: 2px;
+        background-color: #c7c7c7;
+    }
+
+    &--success {
+        border-left: 3px solid #42BC38;
+    }
+
+    &--error {
+        border-left: 3px solid #EB0026;
+    }
+
+    &--warning {
+        border-left: 3px solid #FF8A3B;
+    }
+
+    &--info {
+        border-left: 3px solid #3E8BFE;
+    }
+
+    .Toastify__close-button {
+        color: #000;
+        margin: auto 0;
+        font-size: 12px;
+    }
+}
