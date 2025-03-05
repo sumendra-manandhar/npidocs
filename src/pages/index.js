@@ -19,16 +19,32 @@ export default function Home() {
       sessionStorage.clear();
     }
 
-    const username = sessionStorage.getItem('username');
+    const role = sessionStorage.getItem('role');
 
-    if (username === 'admin') {
-      history.push('/docs/intro');
-    } else if (username === 'npi') {
-      history.push('/docs_npi/intro');
-    }
-    else {
-      history.push('/')
-    }
+   // Route to different paths based on username or role
+   if (role === "admin") {
+    history.push("/docs/intro");
+  } else if (role === "NPI_QR_GW") {
+    history.push("/docs_npiqrgt/intro");
+  } else if (role === "CROSSBORDER") {
+    history.push("/docs_crossborder/intro");
+  } else if (role === "NPI") {
+    history.push("/docs_npi/intro");
+  } else if (role === "NPS") {
+    history.push("/docs_nps/intro");
+  } else if (role === "WALLET") {
+    history.push("/docs_wallet/intro");
+  } else if (role === "NPI_REMIT") {
+    history.push("/docs_npiremit/intro");
+  } else if (role === "NEPALPAY_QR") {
+    history.push("/docs_nepalpay_qr/intro");
+  } else if (role === "NCHL_GW") {
+    history.push("/docs_gw/intro");
+  } else {
+    
+    // Default route if no specific username match
+    history.push("/");
+  }
   }, [history]);
 
 
