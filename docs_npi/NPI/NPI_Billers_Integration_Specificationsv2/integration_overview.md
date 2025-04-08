@@ -9,7 +9,7 @@ sidebar_position: 4
 NPI Billers' UI offers three landing pages: All Billers, Biller Group, and Biller Form. The choice of 
 which landing page to use depends on the specific requirements of the third-party application.
 
-**base_url: https://dev.connectips.com/billers**
+**base_url: https://uat.connectips.com:7443/billers**
 
 ## 4.2. Landing pages
 
