@@ -3390,4 +3390,311 @@ NPI member.
 }
 
 ```
+11. **/api/tp/auto-release/details:** To get details on category purpose and maximum auto-release amount for different banks. This endpoint will return data showing the maximum amount that can be auto-released/debited without any manual intervention required from the NPI member’s debtor bank. This endpoint is 
+applicable in the case of non-real-time payment only. 
+
+**Sample Request:**
+{ 
+ "bankCode": "2301" 
+}
+
+ **Sample Response:**
+```json
+{
+   "data":[
+      {
+         "categoryPurpose":"SSFC",
+         "bankCode":"2301",
+         "maxAutoReleaseAmount":"200,000,000.00",
+         "currency":"NPR",
+         "bankName":"NIC Asia Bank Limited",
+         "status":"Approved"
+      },
+      {
+         "categoryPurpose":"SALA",
+         "bankCode":"2301",
+         "maxAutoReleaseAmount":"5,000,000.00",
+         "currency":"NPR",
+         "bankName":"NIC Asia Bank Limited",
+         "status":"Approved"
+      },
+      {
+         "categoryPurpose":"SALC",
+         "bankCode":"2301",
+         "maxAutoReleaseAmount":"50,000,000.00",
+         "currency":"NPR",
+         "bankName":"NIC Asia Bank Limited",
+         "status":"Approved"
+      },
+      {
+         "categoryPurpose":"SUPP",
+         "bankCode":"2301",
+         "maxAutoReleaseAmount":"100,000,000.00",
+         "currency":"NPR",
+         "bankName":"NIC Asia Bank Limited",
+         "status":"Approved"
+      },
+      {
+         "categoryPurpose":"GOVT",
+         "bankCode":"2301",
+         "maxAutoReleaseAmount":"500,000,000.00",
+         "currency":"NPR",
+         "bankName":"NIC Asia Bank Limited",
+         "status":"Approved"
+      }
+   ],
+   "message":"Success",
+   "status":true
+}
+```
+
+
+**Response parameters details:**
+
+
+<table border="1">
+        <tr>
+            <th>S. No.</th>
+            <th>Field Name</th>
+            <th>Data Type</th>
+            <th>Length</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>categoryPurpose</td>
+            <td>String</td>
+            <td>4</td>
+            <td>Category purpose for payment</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bankCode</td>
+            <td>String</td>
+            <td>4</td>
+            <td>Bank code for which the category details is fetched</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>maxAutoReleaseAmount</td>
+            <td>String</td>
+            <td>13,2</td>
+            <td>Amount that can be directly debited from NPI member’s debtor account without approval from the bank</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Currency</td>
+            <td>String</td>
+            <td>3</td>
+            <td>Currency related to the category purpose</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>bankName</td>
+            <td>String</td>
+            <td>100</td>
+            <td>Bank name for which the category details is fetched</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>status</td>
+            <td>String</td>
+            <td>-</td>
+            <td>Status of the amount limitation which has been set by the particular bank</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Message</td>
+            <td>String</td>
+            <td>-</td>
+            <td>API response message</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>status</td>
+            <td>Boolean</td>
+            <td>-</td>
+            <td>API status</td>
+        </tr>
+</table>
+   
+12. **Balance enquiry**
+
+
+The balance enquiry endpoint can be consumed prior to posting payments in either real time or non-real time services. 
+Only technical members whose account(s) are whitelisted by NCHL and whose debit authority has been obtained from 
+the respective bank(s) are allowed to enquire their available balance.
+
+**POST URL for balance enquiry: /api/account/balance**
+
+
+**Request Parameters:**
+
+
+<table border="1">
+        <tr>
+            <th>S.no</th>
+            <th>Field Name</th>
+            <th>Data Type</th>
+            <th>Length</th>
+            <th>Presence</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>bankId</td>
+            <td>String</td>
+            <td>4</td>
+            <td>Y</td>
+            <td>4 Digit NCHL Bank Code</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>branchId</td>
+            <td>String</td>
+            <td>4</td>
+            <td>Y</td>
+            <td>Branch Code. Default HO branch to be sent</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>accountId</td>
+            <td>String</td>
+            <td>20</td>
+            <td>Y</td>
+            <td>Account Number as listed in NCHL-NPI. (Whitelisted source account by NCHL)</td>
+        </tr>
+</table>
+
+
+
+ **Case Successful:**
+
+**Request:**
+```json
+{ 
+ "bankId": "2501", 
+ "branchId": "53",
+ "accountId": "12xxxxxxxxxxxxxxxxxx45" 
+}
+```
+
+**Success Response:**
+```json
+
+{
+"responseCode": "000", 
+"bankId": "2501", 
+"branchId": "53", 
+"accountId": "12xxxxxxxxxxxxxxxxxx45",
+"currency": "NPR", 
+"totalBal": 61579.82, 
+"availBal": 60579.82, 
+"abPartTranType": "CR", 
+"lbPartTranType": "CR"
+} 
+```
+**Failed Response:**
+```json
+{ 
+"responseCode": "E010", 
+"responseMessage": "RECORD NOT FOUND:- INVALID TECHNICAL MEMBER.", 
+"data": null, 
+"classfielderrorlist": [] 
+}`
+```
+
+ **Response Parameters:**
+
+<table border="1">
+        <tr>
+            <th>S.No</th>
+            <th>Field Name</th>
+            <th>Data Type</th>
+            <th>Length</th>
+            <th>Description</th>
+            <th>Presence</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>responseCode</td>
+            <td>String</td>
+            <td>3</td>
+            <td>API response code. Response code 000 for success and E10 for failure</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>bankId</td>
+            <td>String</td>
+            <td>4</td>
+            <td>4 Digit NCHL Bank Code.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>branchId</td>
+            <td>String</td>
+            <td>4</td>
+            <td>Branch Code.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>accountId</td>
+            <td>String</td>
+            <td>20</td>
+            <td>Account Number as Listed in NCHL NPI. (Whitelisted source account by NCHL)</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Currency</td>
+            <td>String</td>
+            <td>3</td>
+            <td>Currency of the account.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>TotalBal</td>
+            <td>Numeric</td>
+            <td>-</td>
+            <td>Total balance in the account.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>availBal</td>
+            <td>Numeric</td>
+            <td>-</td>
+            <td>Available balance for transaction.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>abPartTranType</td>
+            <td>String</td>
+            <td>2</td>
+            <td>Available balance type.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>lbPartTranType</td>
+            <td>String</td>
+            <td>2</td>
+            <td>Ledger balance type.</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>responseMessage</td>
+            <td>String</td>
+            <td>200</td>
+            <td>Response message is obtained in case of failure. It is conditional.</td>
+            <td>C</td>
+        </tr>
+    </table>
+
 

@@ -3682,7 +3682,7 @@ the respective bank(s) are allowed to enquire their available balance.
         </tr>
         <tr>
             <td>9</td>
-            <td>bPartTranType</td>
+            <td>lbPartTranType</td>
             <td>String</td>
             <td>2</td>
             <td>Ledger balance type.</td>

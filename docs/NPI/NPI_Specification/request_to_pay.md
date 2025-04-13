@@ -30,17 +30,29 @@ through NPI. Further processing of debit transfer request will be done in core e
 **Process Flow**
 
 1. Payee initiates a “request to pay” request. 
+
 2. Payee agent sends the request to NPI. 
+
 3. NPI will perform technical and business validation of the request, checks security and sessions. 
+
 4. NPI will transmit the request to the R2P core engine. 
+
 5. R2P core engine will lodge the request. 
+
 6. It identifies the payer agent and transmits the request.
+
 7. Payer agent will provide “Request to Pay” notification to its user. 
+
 8. Once the user accepts or rejects the request, Payer Agent passes the message to NPI. 
+
 9. NPI will pass the message to R2P engine. 
+
 10. Request to pay engine will validate the message and confirm to NPI. 
+
 11. NPI will initiate the transaction and sends the notification to the R2P core engine. 
+
 12. R2P core engine will send final notification to both payer and payee engine 
+
 
 Members could be either payer agent or payee agent in the payment chain and exchange financial or non-financial message as below.
 

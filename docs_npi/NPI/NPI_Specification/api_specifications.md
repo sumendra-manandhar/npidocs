@@ -3390,7 +3390,7 @@ NPI member.
 }
 
 ```
-11. **./api/tp/auto-release/details:** To get details on category purpose and maximum auto-release amount for different banks. This endpoint will return data showing the maximum amount that can be auto-released/debited without any manual intervention required from the NPI member’s debtor bank. This endpoint is 
+11. **/api/tp/auto-release/details:** To get details on category purpose and maximum auto-release amount for different banks. This endpoint will return data showing the maximum amount that can be auto-released/debited without any manual intervention required from the NPI member’s debtor bank. This endpoint is 
 applicable in the case of non-real-time payment only. 
 
 **Sample Request:**
@@ -3519,7 +3519,7 @@ applicable in the case of non-real-time payment only.
 </table>
    
 
-12. **Balance enquiry**
+12.**Balance enquiry**
 
 
 The balance enquiry endpoint can be consumed prior to posting payments in either real time or non-real time services. 
@@ -3682,7 +3682,7 @@ the respective bank(s) are allowed to enquire their available balance.
         </tr>
         <tr>
             <td>9</td>
-            <td>bPartTranType</td>
+            <td>lbPartTranType</td>
             <td>String</td>
             <td>2</td>
             <td>Ledger balance type.</td>

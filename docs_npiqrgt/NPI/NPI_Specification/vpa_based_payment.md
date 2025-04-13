@@ -65,7 +65,7 @@ participants in VPA based payment network.
 ```
 
  **Network Type** 
- ALL: Fetch the list of all participants in VPA based payment network. 
+ALL: Fetch the list of all participants in VPA based payment network. 
 
 BANK: Fetch the list of banks available for VPA based payment. 
 

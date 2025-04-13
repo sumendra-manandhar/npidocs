@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# 4. Integration
+# 4. Integration 
 
 ## 4.1.Integration Overview
 
@@ -436,7 +436,7 @@ Create request payload by combining NPI Object, debit information, and token.
 
 2) Copy cipsBatchDetail from NPI Object and set debit information
 
-3) [ Generate token](./integration#472-payment-confirm-token-generation)
+3) [ Generate token](./docs_npi/NPI/NPI_Billers_Integration_Specificationsv2/integrationintegration#472-payment-confirm-token-generation)
 
 4) Create final object as above format.
 
