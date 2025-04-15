@@ -9,7 +9,7 @@ sidebar_position: 4
 NPI Billers' UI offers three landing pages: All Billers, Biller Group, and Biller Form. The choice of 
 which landing page to use depends on the specific requirements of the third-party application.
 
-**base_url: https://dev.connectips.com/billers**
+**base_url:https://uat.connectips.com:7443/billers**
 
 ## 4.2. Landing pages
 
@@ -125,7 +125,7 @@ JWT Payload should be valid JSON.
 
 “participant_code”, “session_id”, and “channel” must match with corresponding query param 
 “participant_code”, “session_id”, and “channel”. The JWT must be both signed (JWS) then encrypted
-(JWE). Please follow the steps mentioned  [here](./security)
+(JWE). Please follow the steps mentioned here <!--[here](./security)-->
 
 
 ## 4.5.Error Codes
@@ -253,7 +253,7 @@ session_id: String
 session_id value sent by the host application during the NPI Billers initialization.
 type: String
 
-Message type.[See message types](./integration#46-npi-billers-messages)
+Message type. See message types <!--[See message types](./integration#46-npi-billers-messages)-->
 
 data: String | Object | null
 
@@ -305,8 +305,8 @@ Actual payload for the message. Data type can be different as type.
 
 
 ### 4.6.3. NPI object (npiObject)
-npiObject is signed (JWS) then encrypted (JWE). Please follow the steps mentioned 
- [here](./security) for decryption and signature verification.
+npiObject is signed (JWS) then encrypted (JWE). Please follow the steps mentioned here <!--[here](./security) --> for decryption and signature verification.
+
 ```json
 
 {
@@ -436,7 +436,7 @@ Create request payload by combining NPI Object, debit information, and token.
 
 2) Copy cipsBatchDetail from NPI Object and set debit information
 
-3) [ Generate token](./integration#472-payment-confirm-token-generation)
+3)  Generate token<!--(./integration#472-payment-confirm-token-generation)-->
 
 4) Create final object as above format.
 

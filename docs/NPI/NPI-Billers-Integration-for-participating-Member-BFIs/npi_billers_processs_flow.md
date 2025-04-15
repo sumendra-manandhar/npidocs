@@ -34,8 +34,7 @@ PIN or biometric verification.
 7. After successful user authorization, the third-party app backend posts the payment using the 
 NPI /api/npibiller/confirmbillerpay.do API.
 
-[/api/npibiller/confirmbillerpay.do](./docs_npi/NPI/NPI-Billers-Integration-for-participating-Member-BFIs/npi_billers_processs_flow)
-  
+
 
 
 
