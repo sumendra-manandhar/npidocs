@@ -680,15 +680,16 @@ Below are the sample transaction responses generated using instruction id for bo
             <td>freeText1</td>
             <td>String</td>
             <td>100</td>
-            <td></td>
+            <td>Remitter Name</td>
+            <td>Y</td>
         </tr>
         <tr>
             <td>37</td>
             <td>freeText2</td>
             <td>String</td>
             <td>100</td>
-            <td>Remitter Name</td>
-            <td>Y</td>
+            <td>Remitter’s account number or any other identifiable number if account number is not available. </td>
+            <td>O</td>
         </tr>
         <tr>
             <td>38</td>
@@ -1368,16 +1369,16 @@ Below are the sample transaction responses generated using instruction id for bo
             <td>freeText1</td>
             <td>String</td>
             <td>100</td>
-            <td></td>
-            <td>O</td>
+            <td>Remitter Name</td>
+            <td>Y</td>
         </tr>
         <tr>
             <td>37</td>
             <td>freeText2</td>
             <td>String</td>
             <td>100</td>
-            <td>Remitter Name.</td>
-            <td>Y</td>
+            <td>Remitter’s account number or any other identifiable number if account number is not available.</td>
+            <td>O</td>
         </tr>
         <tr>
             <td>38</td>

@@ -277,11 +277,19 @@ Following points should be consider while posting the transactions through this 
       <td>remitterName</td>
       <td>String</td>
       <td>100</td>
-      <td>Remittance receiving individual name.</td>
+      <td>Remitter’s individual name.</td>
       <td>Y</td>
     </tr>
-    <tr>
+     <tr>
       <td>10</td>
+      <td>remitterAccount</td>
+      <td>String</td>
+      <td>50</td>
+      <td>Remitter’s account number or any other identifiable number if account number is not available.</td>
+      <td>O</td>
+    </tr>
+    <tr>
+      <td>11</td>
       <td>countryOfOrigin</td>
       <td>String</td>
       <td>20</td>
@@ -289,7 +297,7 @@ Following points should be consider while posting the transactions through this 
       <td>Y</td>
     </tr>
     <tr>
-      <td>11</td>
+      <td>12</td>
       <td>purposeOfTransaction</td>
       <td>String</td>
       <td>50</td>
@@ -297,7 +305,7 @@ Following points should be consider while posting the transactions through this 
       <td>Y</td>
     </tr>
     <tr>
-      <td>12</td>
+      <td>13</td>
       <td>remitCompanyName</td>
       <td>String</td>
       <td>50</td>
@@ -305,7 +313,7 @@ Following points should be consider while posting the transactions through this 
       <td>Y</td>
     </tr>
     <tr>
-      <td>13</td>
+      <td>14</td>
       <td>remitterAddress</td>
       <td>String</td>
       <td>100</td>
@@ -313,7 +321,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>14</td>
+      <td>15</td>
       <td>creditorIdType</td>
       <td>String</td>
       <td>4</td>
@@ -321,7 +329,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>15</td>
+      <td>16</td>
       <td>creditorIdValue</td>
       <td>String</td>
       <td>20</td>
@@ -329,7 +337,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>16</td>
+      <td>17</td>
       <td>creditorAddress</td>
       <td>String</td>
       <td>490</td>
@@ -337,7 +345,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>17</td>
+      <td>18</td>
       <td>creditorPhone</td>
       <td>String</td>
       <td>20</td>
@@ -345,7 +353,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>18</td>
+      <td>19</td>
       <td>creditorMobile</td>
       <td>String</td>
       <td>20</td>
@@ -353,7 +361,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>19</td>
+      <td>20</td>
       <td>creditorEmail</td>
       <td>String</td>
       <td>50</td>
@@ -361,7 +369,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>20</td>
+      <td>21</td>
       <td>addenda1</td>
       <td>Integer</td>
       <td>15</td>
@@ -369,7 +377,7 @@ Following points should be consider while posting the transactions through this 
       <td>C</td>
     </tr>
     <tr>
-      <td>21</td>
+      <td>22</td>
       <td>addenda2</td>
       <td>Date</td>
       <td>-</td>
@@ -377,7 +385,7 @@ Following points should be consider while posting the transactions through this 
       <td>C</td>
     </tr>
     <tr>
-      <td>22</td>
+      <td>23</td>
       <td>addenda3</td>
       <td>String</td>
       <td>35</td>
@@ -385,7 +393,7 @@ Following points should be consider while posting the transactions through this 
       <td>C</td>
     </tr>
     <tr>
-      <td>23</td>
+      <td>24</td>
       <td>addenda4</td>
       <td>String</td>
       <td>35</td>
@@ -393,7 +401,7 @@ Following points should be consider while posting the transactions through this 
       <td>C</td>
     </tr>
     <tr>
-      <td>24</td>
+      <td>25</td>
       <td>freeCode1</td>
       <td>String</td>
       <td>20</td>
@@ -401,7 +409,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>25</td>
+      <td>26</td>
       <td>freeCode2</td>
       <td>String</td>
       <td>20</td>
@@ -409,7 +417,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>26</td>
+      <td>27</td>
       <td>freeText1</td>
       <td>String</td>
       <td>100</td>
@@ -417,7 +425,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>27</td>
+      <td>28</td>
       <td>freeText2</td>
       <td>String</td>
       <td>100</td>
@@ -425,7 +433,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>28</td>
+      <td>29</td>
       <td>remarks</td>
       <td>String</td>
       <td>100</td>
@@ -433,7 +441,7 @@ Following points should be consider while posting the transactions through this 
       <td>O</td>
     </tr>
     <tr>
-      <td>29</td>
+      <td>30</td>
       <td>particulars</td>
       <td>String</td>
       <td>100</td>
@@ -487,6 +495,7 @@ Token String=Batch String + Transaction String+","+<user Id>
             "particulars": "charge-particular-1",
             "remarks": "charge-remarks-1 ",
             "remitterName": "Biraj Bahadur",
+            "remitterAccount":"1234567890",
             "countryOfOrigin": "UAE",
             "remitterAddress": "dubai",
             "purposeOfTransaction": "family expenses",

@@ -22,7 +22,7 @@ sidebar_position: 3
       <td>1</td>
       <td>originatorUniqueId</td>
       <td>String</td>
-      <td>Length(max. 30)</td>
+      <td>Length(max. 20)</td>
       <td>Originator unique identifier</td>
       <td>M</td>
      </tr>
@@ -78,7 +78,7 @@ code in NCHL system
       <td>1</td>
       <td>requestIdentifier</td>
       <td>String</td>
-      <td>Length(20) </td>
+      <td>Length(30) </td>
       <td>Request id provided 
 by NPI</td>
       <td>M</td>
@@ -87,7 +87,7 @@ by NPI</td>
       <td>2</td>
       <td>originatorUniqueId</td>
       <td>String</td>
-      <td>Length(max. 30) </td>
+      <td>Length(max. 20) </td>
       <td> Originator unique
 identifier</td>
       <td>M</td>

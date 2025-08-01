@@ -205,27 +205,28 @@ Following points should be consider while posting the transactions to this metho
     <tr><td>6</td><td>creditorBranch</td><td>String</td><td>4</td><td>Financial institution branch where the receiving party account is held.</td><td>Y</td></tr>
     <tr><td>7</td><td>creditorName</td><td>String</td><td>140</td><td>Receiving party Account name.</td><td>Y</td></tr>
     <tr><td>8</td><td>creditorAccount</td><td>String</td><td>20</td><td>Receiving party account number.</td><td>Y</td></tr>
-    <tr><td>9</td><td>remitterName</td><td>String</td><td>100</td><td>Remittance receiving individual name.</td><td>Y</td></tr>
-    <tr><td>10</td><td>countryOfOrigin</td><td>String</td><td>20</td><td>Remittance sending country.</td><td>Y</td></tr>
-    <tr><td>11</td><td>purposeOfTransaction</td><td>String</td><td>50</td><td>Purpose of sending remittance.</td><td>Y</td></tr>
-    <tr><td>12</td><td>remitCompanyName</td><td>String</td><td>50</td><td>Remittance company through which the payment is initiated.</td><td>Y</td></tr>
-    <tr><td>13</td><td>remitterAddress</td><td>String</td><td>100</td><td>City, town or street name of the originating country.</td><td>O</td></tr>
-    <tr><td>14</td><td>creditorIdType</td><td>String</td><td>4</td><td>Receiving party private identification type for ex. Citizenship, pan no, passport etc.</td><td>O</td></tr>
-    <tr><td>15</td><td>creditorIdValue</td><td>String</td><td>20</td><td>Receiving party identification value.</td><td>O</td></tr>
-    <tr><td>16</td><td>creditorAddress</td><td>String</td><td>490</td><td>Receiving party postal address.</td><td>O</td></tr>
-    <tr><td>17</td><td>creditorPhone</td><td>String</td><td>20</td><td>Receiving party phone number in the format +&lt;country code&gt;-&lt;area code&gt;-&lt;Phone Number&gt;.</td><td>O</td></tr>
-    <tr><td>18</td><td>creditorMobile</td><td>String</td><td>20</td><td>Receiving party mobile number in the format +&lt;country code&gt;-&lt;area code&gt;-&lt;Phone Number&gt;.</td><td>O</td></tr>
-    <tr><td>19</td><td>creditorEmail</td><td>String</td><td>50</td><td>Receiving party valid email address.</td><td>O</td></tr>
-    <tr><td>20</td><td>addenda1</td><td>Integer</td><td>15</td><td>Information that provides extra details about the transaction. Value may be mandatory depending on configuration.</td><td>C</td></tr>
-    <tr><td>21</td><td>addenda2</td><td>Date</td><td>-</td><td></td><td>C</td></tr>
-    <tr><td>22</td><td>addenda3</td><td>String</td><td>35</td><td></td><td>C</td></tr>
-    <tr><td>23</td><td>addenda4</td><td>String</td><td>35</td><td></td><td>C</td></tr>
-    <tr><td>24</td><td>freeCode1</td><td>String</td><td>20</td><td>Extra transaction details used for reconciliation, relevant only to the initiating party bank.</td><td>O</td></tr>
-    <tr><td>25</td><td>freeCode2</td><td>String</td><td>20</td><td></td><td>O</td></tr>
-    <tr><td>26</td><td>freeText1</td><td>String</td><td>100</td><td></td><td>O</td></tr>
-    <tr><td>27</td><td>freeText2</td><td>String</td><td>100</td><td></td><td>O</td></tr>
-    <tr><td>28</td><td>remarks</td><td>String</td><td>100</td><td>Remarks field.</td><td>O</td></tr>
-    <tr><td>29</td><td>particulars</td><td>String</td><td>100</td><td>Particulars field.</td><td>O</td></tr>
+    <tr><td>9</td><td>remitterName</td><td>String</td><td>100</td><td>Remitter’s individual name.</td><td>Y</td></tr>
+    <tr><td>10</td><td>remitterAccount</td><td>String</td><td>50</td><td>Remitter’s account number or any other identifiable number if account number is not available.</td><td>O</td></tr>
+    <tr><td>11</td><td>countryOfOrigin</td><td>String</td><td>20</td><td>Remittance sending country.</td><td>Y</td></tr>
+    <tr><td>12</td><td>purposeOfTransaction</td><td>String</td><td>50</td><td>Purpose of sending remittance.</td><td>Y</td></tr>
+    <tr><td>13</td><td>remitCompanyName</td><td>String</td><td>50</td><td>Remittance company through which the payment is initiated.</td><td>Y</td></tr>
+    <tr><td>14</td><td>remitterAddress</td><td>String</td><td>100</td><td>City, town or street name of the originating country.</td><td>O</td></tr>
+    <tr><td>15</td><td>creditorIdType</td><td>String</td><td>4</td><td>Receiving party private identification type for ex. Citizenship, pan no, passport etc.</td><td>O</td></tr>
+    <tr><td>16</td><td>creditorIdValue</td><td>String</td><td>20</td><td>Receiving party identification value.</td><td>O</td></tr>
+    <tr><td>17</td><td>creditorAddress</td><td>String</td><td>490</td><td>Receiving party postal address.</td><td>O</td></tr>
+    <tr><td>18</td><td>creditorPhone</td><td>String</td><td>20</td><td>Receiving party phone number in the format +&lt;country code&gt;-&lt;area code&gt;-&lt;Phone Number&gt;.</td><td>O</td></tr>
+    <tr><td>19</td><td>creditorMobile</td><td>String</td><td>20</td><td>Receiving party mobile number in the format +&lt;country code&gt;-&lt;area code&gt;-&lt;Phone Number&gt;.</td><td>O</td></tr>
+    <tr><td>20</td><td>creditorEmail</td><td>String</td><td>50</td><td>Receiving party valid email address.</td><td>O</td></tr>
+    <tr><td>21</td><td>addenda1</td><td>Integer</td><td>15</td><td>Information that provides extra details about the transaction. Value may be mandatory depending on configuration.</td><td>C</td></tr>
+    <tr><td>22</td><td>addenda2</td><td>Date</td><td>-</td><td></td><td>C</td></tr>
+    <tr><td>23</td><td>addenda3</td><td>String</td><td>35</td><td></td><td>C</td></tr>
+    <tr><td>24</td><td>addenda4</td><td>String</td><td>35</td><td></td><td>C</td></tr>
+    <tr><td>25</td><td>freeCode1</td><td>String</td><td>20</td><td>Extra transaction details used for reconciliation, relevant only to the initiating party bank.</td><td>O</td></tr>
+    <tr><td>26</td><td>freeCode2</td><td>String</td><td>20</td><td></td><td>O</td></tr>
+    <tr><td>27</td><td>freeText1</td><td>String</td><td>100</td><td></td><td>O</td></tr>
+    <tr><td>28</td><td>freeText2</td><td>String</td><td>100</td><td></td><td>O</td></tr>
+    <tr><td>29</td><td>remarks</td><td>String</td><td>100</td><td>Remarks field.</td><td>O</td></tr>
+    <tr><td>30</td><td>particulars</td><td>String</td><td>100</td><td>Particulars field.</td><td>O</td></tr>
   </tbody>
 </table>
 
@@ -274,6 +275,7 @@ Token String=Batch String + Transaction String+","+<user Id>
             "particulars": "remitnonreal-particular-1",
             "remarks": "remitnonreal-remarks-1 ",
             "remitterName": "Biraj Bahadur",
+            "remitterAccount":"1234567890",
             "countryOfOrigin": "UAE",
             "remitterAddress": "dubai",
             "purposeOfTransaction": "home expenses",
