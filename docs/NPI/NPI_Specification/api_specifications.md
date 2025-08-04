@@ -1382,7 +1382,7 @@ NotFound
 
 Forbidden 
 
-**RequestMessage Example:** 
+**RequestMessage Example (Single Batch):** 
 ```json
 {
   "nchlIpsBatchDetail": {
@@ -1424,6 +1424,66 @@ Forbidden
     }
   ],
   "token": "D1xAD6zEHvRpAbd6rUUekdAPpc+RvGnaL8bKbKUf9MVKrjrr8zZN2JLer87PM5s0UVlYXh7KvUW8s0GwjAlPTmZkDWr3dIHlwVZqVOCqf23Ji13BjqhrAtwxPOq9Bjtbb3Pe+l4dcuSj6RZiBv7SoVkYV0a4BkiGORL8U7lAv62Vi/00pFEDcfibqvtAluRzoDsboJh3+n0tmxai68+UOzPLKPQ0ofg7cgoTR3xUYVX8kdkR9FkSRM+os5DIbB1WN21spAo23sRhxS6GX4AYABhYYmwp7+aTAbgc0C4VR6epyIfGYKigjmRRXsnVFyevsbBatLiKgh9u5Kd/1kzY9w=="
+}
+
+```
+
+
+**RequestMessage Example (Multiple Batch):** 
+```json
+{
+   "nchlIpsBatchDetail":{
+      "batchId":"TEST20250803",
+      "batchAmount":20,
+      "batchCount":2,
+      "batchCrncy":"NPR",
+      "categoryPurpose":"CUST",
+      "debtorAgent":"2501",
+      "debtorBranch":"1",
+      "debtorName":"Ankit Neupane",
+      "debtorAccount":"0010055573200018",
+      "debtorIdType":"0001",
+      "debtorIdValue":"123456",
+      "debtorAddress":"Kathmandu Nepal",
+      "debtorPhone":"+977-01-4255306",
+      "debtorMobile":"+977-9841011688",
+      "debtorEmail":"test@test.com"
+   },
+   "nchlIpsTransactionDetailList":[
+      {
+         "instructionId":"TEST20250803-1",
+         "endToEndId":"TEST20250803-1",
+         "amount":15,
+         "creditorAgent":"4501",
+         "creditorBranch":"23",
+         "creditorName":"shreya karki",
+         "creditorAccount":"001011160000374",
+         "creditorIdValue":"5689755562",
+         "creditorAddress":"Bhaktapur Nepal",
+         "creditorPhone":"+977-01-6655698",
+         "creditorMobile":"+977-9848701325",
+         "creditorEmail":"creditor1@gmail.com",
+         "addenda1":"8965",
+         "addenda2":2131
+      },
+      {
+         "instructionId":"TEST20250803-2",
+         "endToEndId":"TEST20250803-2",
+         "amount":5,
+         "creditorAgent":"4501",
+         "creditorBranch":"23",
+         "creditorName":"KESHAB G.C",
+         "creditorAccount":"023011050000749",
+         "creditorIdValue":"5689755562",
+         "creditorAddress":"Bhaktapur Nepal",
+         "creditorPhone":"+977-01-6655698",
+         "creditorMobile":"+977-9848701325",
+         "creditorEmail":"creditor1@gmail.com",
+         "addenda1":"8965",
+         "addenda2":2131
+      }
+   ],
+   "token":"Gq2F0hemhaE5tpFcASCaaUY7HTzFdMbp2JyaN6l8y7co9AjbX/KMNZVE8HKJiCZ9ShsrRxJUVbo45DCZIB2YuCXyVtcMZZ74j9JwGrq1NzkV7Hb9GOaesXFKXfpJqzuXebEKpm+ohbO1lVTB/hFPIFpW6vBpwI2N4gPTGyVO4yg="
 }
 
 ```
