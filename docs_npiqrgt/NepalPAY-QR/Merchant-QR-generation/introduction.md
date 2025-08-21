@@ -247,6 +247,8 @@ usages.</td>
    "token":"PcK7JFPfEUvtGouuShjQgten7HQsAxxGVZJ+38ORzEOCEMV3Dlt7V0M7g+HUBfn0+oHZqAsb2pzTQHWEQPLmPOGR4lVEoy581vYmN5PfMLSQqb/UxixT1O4X6ZFeV9sVivP3Y1gVfILPIzRm2CfML4BTHhDlpNvoOQ840nvNn2E="
 }
 ```
+**PROCESS TO GENERATE TOKEN**
+
 ```json
 TokenString for dynamic QR: acquirerId+”, “+merchantId +”, “+merchantCategoryCode+”, “+transactionCurrency+”, “+ transactionAmount+”, “+billNumber+”, “+userId
 ```
@@ -254,6 +256,13 @@ TokenString for dynamic QR: acquirerId+”, “+merchantId +”, “+merchantCat
 ```json
 TokenString for static QR: acquirerId+”, “+merchantId +”, “+merchantCategoryCode+”, “+transactionCurrency+”, “+billNumber+”, “+userId
 ```
+
+
+i.  Generate message digest of the token string using SHA256 hashing algorithm. <br/>
+ii. Sign the message digest using the digital certificate private key (pfx file/keystore). The digital signature algorithm will be the SHA256withRSA. Private key file will be NPI.pfx for testing purpose. <br/>
+iii. Convert the signed token above in step ii to base64 encoding. <br/>
+iv. Pass this signature string from step iii to the “token” field of the request message.<br/>
+
 
 **Note: userId is a NPI user provided to the merchant.**
 
