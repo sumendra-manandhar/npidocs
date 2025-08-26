@@ -6,7 +6,8 @@ sidebar_position: 1
 # 1. Individual transaction report 
 
 Post: /nQR/v1/merchanttxnreport
-Query parameters
+
+**Query parameters**
 
 
 <table>
@@ -63,6 +64,17 @@ Query parameters
     </tr>
   </tbody>
 </table>
+
+
+
+**Query parameters ( _Date wise Report_)**
+
+| #   | File Name             | Type   | Length | Required | Remarks                                                                        |
+| --- | --------------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
+| 1   | fromDate              | String | 8      | M        | Date from when the transaction report should be generated. Format: YYYY-MM-DD  |
+| 2   | toDate                | String | 8      | M        | Date up to when the transaction report should be generated. Format: YYYY-MM-DD |
+| 3   | merchantId            | String |        | M        | Creditor Id / Merchant Code code                                               |
+| 4   | acquirerId / issuerId | String |       | M        | Acquirer / Issuer of the QR code                                               |
 
 
 **Response parameters**
@@ -236,6 +248,18 @@ Query parameters
    "validationTraceId":"2312060000216812DWB",
    "merchantId":"2501DBGLNQG",
    "acquirerId":"00002501"
+}
+```
+
+**Sample Request( _Date wise Report_)**
+
+```json
+{
+  "fromDate": "2024-07-24",
+  "toDate": "2024-07-24",
+  "merchantId": "2501TUXLIDR",
+  "acquirerId": "00002501"
+
 }
 ```
 

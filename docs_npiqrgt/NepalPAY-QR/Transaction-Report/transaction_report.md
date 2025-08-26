@@ -2,12 +2,11 @@
 sidebar_position: 1
 ---
 
-
-# 1. Individual transaction report 
+# 1. Individual transaction report
 
 Post: /nQR/v1/merchanttxnreport
-Query parameters
 
+**Query parameters**
 
 <table>
   <thead>
@@ -64,9 +63,16 @@ Query parameters
   </tbody>
 </table>
 
+**Query parameters ( _Date wise Report_)**
+
+| #   | File Name             | Type   | Length | Required | Remarks                                                                        |
+| --- | --------------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
+| 1   | fromDate              | String | 8      | M        | Date from when the transaction report should be generated. Format: YYYY-MM-DD  |
+| 2   | toDate                | String | 8      | M        | Date up to when the transaction report should be generated. Format: YYYY-MM-DD |
+| 3   | merchantId            | String |        | M        | Creditor Id / Merchant Code code                                               |
+| 4   | acquirerId / issuerId | String |       | M        | Acquirer / Issuer of the QR code                                               |
 
 **Response parameters**
-
 
 <table>
   <thead>
@@ -227,190 +233,197 @@ Query parameters
   </tbody>
 </table>
 
-
-
-
 **Sample Request**
+
 ```json
 {
-   "validationTraceId":"2312060000216812DWB",
-   "merchantId":"2501DBGLNQG",
-   "acquirerId":"00002501"
+  "validationTraceId": "2312060000216812DWB",
+  "merchantId": "2501DBGLNQG",
+  "acquirerId": "00002501"
+}
+```
+
+**Sample Request( _Date wise Report_)**
+
+```json
+{
+  "fromDate": "2024-07-24",
+  "toDate": "2024-07-24",
+  "merchantId": "2501TUXLIDR",
+  "acquirerId": "00002501"
+
 }
 ```
 
 
 **Sample Response**
-```json
 
+```json
 {
-   "timestamp":"2024-02-07T07:10:47.928+0000",
-   "responseCode":"200",
-   "responseStatus":"SUCCESS",
-   "responseMessage":null,
-   "responseBody":[
-      {
-         "sessionSrlNo":"5005",
-         "recDate":"2023-12-06",
-         "instructionId":"EVOL1saurv",
-         "nQrTxnId":"2312060000059575KMB",
-         "acquirerId":"00002501",
-         "issuerId":"00010016",
-         "network":"NQR",
-         "issuerNetwork":"NQR",
-         "amount":500.0,
-         "interchangeFee":0.0,
-         "transactionFee":0.0,
-         "debitStatus":"000",
-         "creditStatus":"DEFER",
-         "payerName":"Saurav Khatri",
-         "tranType":"PMT",
-         "payerMobileNumber":"9800000417",
-         "merchantName":"Evolve Pvt. Ltd. ",
-         "merchantTxnRef":"MerchantTxnReference",
-         "terminal":null,
-         "merchantBillNo":"0",
-         "instrument":null,
-         "validationTraceId":null,
-         "merchantPan":null,
-         "nfcTxnId":null
-      }
-   ]
+  "timestamp": "2024-02-07T07:10:47.928+0000",
+  "responseCode": "200",
+  "responseStatus": "SUCCESS",
+  "responseMessage": null,
+  "responseBody": [
+    {
+      "sessionSrlNo": "5005",
+      "recDate": "2023-12-06",
+      "instructionId": "EVOL1saurv",
+      "nQrTxnId": "2312060000059575KMB",
+      "acquirerId": "00002501",
+      "issuerId": "00010016",
+      "network": "NQR",
+      "issuerNetwork": "NQR",
+      "amount": 500.0,
+      "interchangeFee": 0.0,
+      "transactionFee": 0.0,
+      "debitStatus": "000",
+      "creditStatus": "DEFER",
+      "payerName": "Saurav Khatri",
+      "tranType": "PMT",
+      "payerMobileNumber": "9800000417",
+      "merchantName": "Evolve Pvt. Ltd. ",
+      "merchantTxnRef": "MerchantTxnReference",
+      "terminal": null,
+      "merchantBillNo": "0",
+      "instrument": null,
+      "validationTraceId": null,
+      "merchantPan": null,
+      "nfcTxnId": null
+    }
+  ]
 }
 ```
-
 
 **Sample Request**
-```json
 
+```json
 {
-   "fromDate":"2023-12-10",
-   "toDate":"2023-12-12",
-   "merchantId":"2501DBGLNQG",
-   "acquirerId":"00002501"
+  "fromDate": "2023-12-10",
+  "toDate": "2023-12-12",
+  "merchantId": "2501DBGLNQG",
+  "acquirerId": "00002501"
 }
 ```
-
 
 **Sample Response**
-```json
 
+```json
 {
-   "timestamp":"2024-02-07T07:18:17.551+0000",
-   "responseCode":"200",
-   "responseStatus":"SUCCESS",
-   "responseMessage":null,
-   "responseBody":[
-      {
-         "sessionSrlNo":"5039",
-         "recDate":"2023-12-10",
-         "instructionId":"H11wew23",
-         "nQrTxnId":"2312100000059653HMX",
-         "acquirerId":"00002501",
-         "issuerId":"00010020",
-         "network":"NQR",
-         "issuerNetwork":"NQR",
-         "amount":784.0,
-         "interchangeFee":0.0,
-         "transactionFee":0.0,
-         "debitStatus":"000",
-         "creditStatus":"DEFER",
-         "payerName":"Saurav Khatri",
-         "tranType":"PMT",
-         "payerMobileNumber":"9813979589",
-         "merchantName":"Evolve Pvt. Ltd. ",
-         "merchantTxnRef":"MerchantTxnReference",
-         "terminal":null,
-         "merchantBillNo":"0",
-         "instrument":null,
-         "validationTraceId":null,
-         "merchantPan":null,
-         "nfcTxnId":null
-      },
-      {
-         "sessionSrlNo":"5039",
-         "recDate":"2023-12-10",
-         "instructionId":"H11wewre23",
-         "nQrTxnId":"2312100000059654CCE",
-         "acquirerId":"00002501",
-         "issuerId":"00010020",
-         "network":"NQR",
-         "issuerNetwork":"NQR",
-         "amount":784.0,
-         "interchangeFee":0.0,
-         "transactionFee":0.0,
-         "debitStatus":"000",
-         "creditStatus":"DEFER",
-         "payerName":"Saurav Khatri",
-         "tranType":"PMT",
-         "payerMobileNumber":"9813979589",
-         "merchantName":"Evolve Pvt. Ltd. ",
-         "merchantTxnRef":"MerchantTxnReference",
-         "terminal":null,
-         "merchantBillNo":"0",
-         "instrument":null,
-         "validationTraceId":null,
-         "merchantPan":null,
-         "nfcTxnId":null
-      },
-      {
-         "sessionSrlNo":"5040",
-         "recDate":"2023-12-10",
-         "instructionId":"Hswre23",
-         "nQrTxnId":"2312100000059655VIU",
-         "acquirerId":"00002501",
-         "issuerId":"00010020",
-         "network":"NQR",
-         "issuerNetwork":"NQR",
-         "amount":20000.0,
-         "interchangeFee":0.0,
-         "transactionFee":0.0,
-         "debitStatus":"000",
-         "creditStatus":"DEFER",
-         "payerName":"Saurav Khatri",
-         "tranType":"PMT",
-         "payerMobileNumber":"9813979589",
-         "merchantName":"Evolve Pvt. Ltd. ",
-         "merchantTxnRef":"MerchantTxnReference",
-         "terminal":null,
-         "merchantBillNo":"0",
-         "instrument":null,
-         "validationTraceId":null,
-         "merchantPan":null,
-         "nfcTxnId":null
-      },
-      {
-         "sessionSrlNo":"5040",
-         "recDate":"2023-12-10",
-         "instructionId":"Mere23",
-         "nQrTxnId":"2312100000059656KZT",
-         "acquirerId":"00002501",
-         "issuerId":"00010020",
-         "network":"NQR",
-         "issuerNetwork":"NQR",
-         "amount":20000.0,
-         "interchangeFee":0.0,
-         "transactionFee":0.0,
-         "debitStatus":"000",
-         "creditStatus":"DEFER",
-         "payerName":"Saurav Khatri",
-         "tranType":"PMT",
-         "payerMobileNumber":"9813979589",
-         "merchantName":"Evolve Pvt. Ltd. ",
-         "merchantTxnRef":"MerchantTxnReference",
-         "terminal":null,
-         "merchantBillNo":"0",
-         "instrument":null,
-         "validationTraceId":null,
-         "merchantPan":null,
-         "nfcTxnId":null
-      }
-   ]
+  "timestamp": "2024-02-07T07:18:17.551+0000",
+  "responseCode": "200",
+  "responseStatus": "SUCCESS",
+  "responseMessage": null,
+  "responseBody": [
+    {
+      "sessionSrlNo": "5039",
+      "recDate": "2023-12-10",
+      "instructionId": "H11wew23",
+      "nQrTxnId": "2312100000059653HMX",
+      "acquirerId": "00002501",
+      "issuerId": "00010020",
+      "network": "NQR",
+      "issuerNetwork": "NQR",
+      "amount": 784.0,
+      "interchangeFee": 0.0,
+      "transactionFee": 0.0,
+      "debitStatus": "000",
+      "creditStatus": "DEFER",
+      "payerName": "Saurav Khatri",
+      "tranType": "PMT",
+      "payerMobileNumber": "9813979589",
+      "merchantName": "Evolve Pvt. Ltd. ",
+      "merchantTxnRef": "MerchantTxnReference",
+      "terminal": null,
+      "merchantBillNo": "0",
+      "instrument": null,
+      "validationTraceId": null,
+      "merchantPan": null,
+      "nfcTxnId": null
+    },
+    {
+      "sessionSrlNo": "5039",
+      "recDate": "2023-12-10",
+      "instructionId": "H11wewre23",
+      "nQrTxnId": "2312100000059654CCE",
+      "acquirerId": "00002501",
+      "issuerId": "00010020",
+      "network": "NQR",
+      "issuerNetwork": "NQR",
+      "amount": 784.0,
+      "interchangeFee": 0.0,
+      "transactionFee": 0.0,
+      "debitStatus": "000",
+      "creditStatus": "DEFER",
+      "payerName": "Saurav Khatri",
+      "tranType": "PMT",
+      "payerMobileNumber": "9813979589",
+      "merchantName": "Evolve Pvt. Ltd. ",
+      "merchantTxnRef": "MerchantTxnReference",
+      "terminal": null,
+      "merchantBillNo": "0",
+      "instrument": null,
+      "validationTraceId": null,
+      "merchantPan": null,
+      "nfcTxnId": null
+    },
+    {
+      "sessionSrlNo": "5040",
+      "recDate": "2023-12-10",
+      "instructionId": "Hswre23",
+      "nQrTxnId": "2312100000059655VIU",
+      "acquirerId": "00002501",
+      "issuerId": "00010020",
+      "network": "NQR",
+      "issuerNetwork": "NQR",
+      "amount": 20000.0,
+      "interchangeFee": 0.0,
+      "transactionFee": 0.0,
+      "debitStatus": "000",
+      "creditStatus": "DEFER",
+      "payerName": "Saurav Khatri",
+      "tranType": "PMT",
+      "payerMobileNumber": "9813979589",
+      "merchantName": "Evolve Pvt. Ltd. ",
+      "merchantTxnRef": "MerchantTxnReference",
+      "terminal": null,
+      "merchantBillNo": "0",
+      "instrument": null,
+      "validationTraceId": null,
+      "merchantPan": null,
+      "nfcTxnId": null
+    },
+    {
+      "sessionSrlNo": "5040",
+      "recDate": "2023-12-10",
+      "instructionId": "Mere23",
+      "nQrTxnId": "2312100000059656KZT",
+      "acquirerId": "00002501",
+      "issuerId": "00010020",
+      "network": "NQR",
+      "issuerNetwork": "NQR",
+      "amount": 20000.0,
+      "interchangeFee": 0.0,
+      "transactionFee": 0.0,
+      "debitStatus": "000",
+      "creditStatus": "DEFER",
+      "payerName": "Saurav Khatri",
+      "tranType": "PMT",
+      "payerMobileNumber": "9813979589",
+      "merchantName": "Evolve Pvt. Ltd. ",
+      "merchantTxnRef": "MerchantTxnReference",
+      "terminal": null,
+      "merchantBillNo": "0",
+      "instrument": null,
+      "validationTraceId": null,
+      "merchantPan": null,
+      "nfcTxnId": null
+    }
+  ]
 }
 ```
 
-
-Note: 
+Note:
 
 1. For the finality of transaction, kindly consider debitStatus 000 and creditStatus (‘000’,’DEFER’ and 999).
 
