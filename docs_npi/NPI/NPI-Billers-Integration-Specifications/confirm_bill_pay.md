@@ -16,8 +16,8 @@ and actual amount received in the response of lodge bill to be mapped in confirm
 **Post URL: /api/billpayment/confirmbillpay.do (Real Time)**
 
  **: /api/ips/billpayment/confirmbillpay.do (Non-Real Time)**
-
-**Request Parameters**
+ 
+**Request Parameters (Real Time)**
 
 ```json
 {
@@ -50,6 +50,41 @@ and actual amount received in the response of lodge bill to be mapped in confirm
 }
 
 ```
+
+**Request Parameters(Non-Real Time)**
+
+```json
+ {
+    "nchlIpsBatchDetail": {
+        "batchId": "T13-12818780108",
+    "batchAmount": 1000,
+    "batchCount": 1,
+    "batchCrncy": "NPR",
+    "categoryPurpose": "GREV",
+    "debtorAgent": "2601",
+    "debtorBranch": "1",
+    "debtorName": "Test Account",
+    "debtorAccount": "00111900921246000002",
+    "debtorIdType": "0001",
+    "debtorIdValue": "123456",
+    "debtorAddress": "Kathmandu Nepal",
+    "debtorPhone": "+977-01-4255306",
+    "debtorMobile": "+977-9812345678",
+    "debtorEmail": "test@test.com"
+    },
+    "nchlIpsTransactionDetail": {
+        "instructionId": "T13-12818780108-1",
+    "endToEndId": "Traffic Fine Payment",
+    "amount": 1000,
+    "appId": "MER-984-APP-1",
+    "refId": "187145",
+    "freeCode1": "7778"
+    },
+  "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=="
+}
+
+```
+
 **Response Parameters** 
 ```json
 {

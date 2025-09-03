@@ -248,7 +248,7 @@ be the SHA256withRSA.
 
 **Example:** 
 
-**Sample Request**
+**Sample Request (Real Time)**
 
 ```json
 {
@@ -281,6 +281,40 @@ be the SHA256withRSA.
 }
 
 ```
+
+**Sample Request (Non-Real Time)**
+
+```json
+ {
+    "nchlIpsBatchDetail": {
+        "batchId": "IRD-20250610-12",
+        "batchAmount": "250",
+        "batchCount": "1",
+        "batchCrncy": "NPR",
+        "categoryPurpose": "GREV",
+        "debtorAgent": "2501",
+        "debtorBranch": "1",
+        "debtorName": "Ankit Neupane",
+        "debtorAccount": "0010055573200018",
+        "debtorIdType": "0001",
+        "debtorIdValue": "123456",
+        "debtorAddress": "Kathmandu Nepal",
+        "debtorPhone": "",
+        "debtorMobile": "",
+        "debtorEmail": ""
+    },
+    "nchlIpsTransactionDetail": {
+        "instructionId": "IRD-20250610-12",
+        "endToEndId": "IRD-20250610",
+        "amount": "250",
+        "appId": "MER-7-APP-8",
+        "refId": "2081-2483782"
+    },
+  "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=="
+}
+
+```
+
 
 Note: Fields to consider during response from Traffic Fine payment service
 
