@@ -28,7 +28,7 @@ payee validation. This API acts as the non-financial API of xBorder transaction.
     "type": "PERSON",
     "accountType": "VPA|ACCOUNT",
     "accountDetail": {
-      "vpa": "9849428177@cips",
+      "vpa": "9800000000@cips",
       "accountNumber": "1234567896325",
       "bankCode": "2501"
     },
@@ -60,7 +60,7 @@ payee validation. This API acts as the non-financial API of xBorder transaction.
     },
     "payeeRelationShip": "Brother",
     "mobileNumber": "+91-1236547899",
-    "email": "piyush97@gmail.com"
+    "email": "test@gmail.com"
   }
 }
 ```
@@ -85,7 +85,7 @@ payee validation. This API acts as the non-financial API of xBorder transaction.
       "type": "PERSON",
       "accountType": "VPA|ACCOUNT",
       "accountDetail": {
-        "vpa": "9849428177@cips",
+        "vpa": "9800000000@cips",
         "accountNumber": "1234567896325",
         "bankCode": "2501"
       },
@@ -109,7 +109,7 @@ payee validation. This API acts as the non-financial API of xBorder transaction.
       },
       "payeeRelationShip": "Brother",
       "mobileNumber": "+91-1236547899",
-      "email": "piyush97@gmail.com"
+      "email": "test@gmail.com"
     }
   },
   "responseErrors": null
@@ -161,7 +161,7 @@ in customer validation API as original transaction Id during payment API.
       "name": "Sudhan Shrestha",
       "type": "PERSON",
       "accountDetail": {
-        "vpa": "9849428177@cips",
+        "vpa": "9800000000@cips",
         "accountNumber": "1234567896325",
         "bankCode": "2501"
       }
@@ -177,7 +177,7 @@ in customer validation API as original transaction Id during payment API.
       },
       "payeeRelationShip": "Brother",
       "mobileNumber": "+91-1236547899",
-      "email": "piyush97@gmail.com"
+      "email": "test@gmail.com"
     }
   },
   "responseErrors": null
@@ -227,7 +227,7 @@ This API is used to fetch transaction status which could be very useful for reco
       "name": "Sudan Shrestha",
       "type": "PERSON",
       "accountDetail": {
-        "vpa": "9849428177@cips",
+        "vpa": "9800000000@cips",
         "accountNumber": "1234567896325",
         "bankCode": "2501"
       }
@@ -243,7 +243,7 @@ This API is used to fetch transaction status which could be very useful for reco
       },
       "payeeRelationShip": "Brother",
       "mobileNumber": "+91-1236547899",
-      "email": "piyush97@gmail.com"
+      "email": "test@gmail.com"
     }
   },
   "responseErrors": null

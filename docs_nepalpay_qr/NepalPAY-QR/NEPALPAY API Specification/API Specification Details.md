@@ -2379,11 +2379,11 @@ algorithm will be the SHA256 with RSA.
       PLmPOGR4lVEoy581vYmN5PfMLSQqb/UxixT1O4X6ZFeV9sVivP3Y1gVfILPIzRm2CfML4BTHhDlpNvoOQ84
       0nvNn2E=",
       "channel": "CIPS",
-      "payerMobile": "9849428177",
+      "payerMobile": "9800000000",
       "sessionNo": "1234",
       "extraPaymentParams":
                   {
-                  "customerName": "Rajim Ali Miya",
+                  "customerName": "Test User",
                   "address": "Gulumi ",
                   "txnCrncy": "NPR"
                   }

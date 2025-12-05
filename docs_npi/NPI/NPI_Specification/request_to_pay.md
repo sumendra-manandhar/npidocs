@@ -1860,7 +1860,7 @@ Token String= participantId+”,” + identifier+”,” + userIdentifier +”,�
    "amount":"1000.00",
    "debitType":"F",
    "bankName":"NMB Bank Limited",
-   "mobileNo":"9849428177",
+   "mobileNo":"9800000000",
    "mandateStartDate":"2022-08-28",
    "mandateExpiryDate":"2023-01-28",
    "mandateTokenNickName":"*****017",
