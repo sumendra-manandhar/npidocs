@@ -67,7 +67,7 @@ For the request body:
   "tranId": "12345",
   "bankId": "0401",
   "solId": "28",
-  "accountId": "2810017501564"
+  "accountId": "28*******1564"
 }
 ```
 

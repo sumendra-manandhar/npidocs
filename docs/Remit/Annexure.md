@@ -308,7 +308,7 @@ Below are the lists of other supporting APIs to extract the list and/or setups f
             "bankId": "7516",
             "branchId": "1",
             "accountName": "Test Account",
-            "accountId": "002001535353535",
+            "accountId": "002********4569",
             "bankName": "Best Company Ltd.",
             "status": "ACCEPTED",
             "rcreTime": "2022-07-27T06:48:02.566+0000"
@@ -319,7 +319,7 @@ Below are the lists of other supporting APIs to extract the list and/or setups f
             "bankId": "9931",
             "branchId": "71",
             "accountName": "P.U.-SEWA AAYOG OFFICE",
-            "accountId": "0701017501133",
+             "accountId": "28*******1564"
             "bankName": "Mahalaxmi Bikas Bank Ltd.",
             "status": "ACCEPTED",
             "rcreTime": "2022-08-01T09:31:35.104+0000"

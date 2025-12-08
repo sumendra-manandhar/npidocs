@@ -189,7 +189,7 @@ sidebar_position: 3
 {
     "bankId": "0401",
     "branchId": "81",
-    "accountId": "08110017501011",
+    "accountId": "08********4512",
     "accountName": null,
     "currency": "NPR",
     "responseCode": "000",
@@ -205,7 +205,7 @@ sidebar_position: 3
 {
     "bankId": "0401",
     "branchId": "81",
-    "accountId": "08110017501011",
+    "accountId": "08********4512",
     "accountName": null,
     "currency": "NPR",
     "responseCode": "999",
@@ -222,7 +222,7 @@ sidebar_position: 3
 {
     "bankId": "0401",
     "branchId": "81",
-    "accountId": "08110017501011",
+    "accountId": "08********4512",
     "accountName": null,
     "currency": "NPR",
     "responseCode": "523",
