@@ -216,7 +216,7 @@ The signature string is the combination of response parameters in the following 
 "merchantName": "Quantum Labs",
 "merchantBillNo": "NA",
 "paymentRef": "2411100000067378ZHU",
-"payerMobile": "+977-9843705813",
+"payerMobile": "+977-98********",
 "extraPaymentParams": {
 "address": "NCHL",
 "txnCrncy": "NPR",

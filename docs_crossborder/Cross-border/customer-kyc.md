@@ -26,7 +26,7 @@ KYC API is to be secured using the Basic Auth
     "payerName": "Jhon Jhon",
     "payerVPA": "jhon12@icici",
     "payeeVPA": "anand12@nica",
-    "payeeName": "Anand Marasini",
+    "payeeName": "Test User",
     "payerMobileNumber": "+911235633632"
   }
 }
@@ -39,8 +39,8 @@ KYC API is to be secured using the Basic Auth
   "responseCode": "000",
   "responseMessage": "Success",
   "responseData": {
-    "fullName": "Anand Marasini",
-    "accountNumber": "0012345678963",
+    "fullName": "Test User",
+    "accountNumber": "00******4528",
     "documentNumber": "1111/45253",
     "documentType": "CTZN|PASSPORT|DRIVING LICENCE|NATIONAL ID|PAN|OTHERS",
     "issuedDate": "2040-03-04",
@@ -77,7 +77,7 @@ his/her account before getting any xBorder request or after getting xBorder requ
   "instrument": "MB|IBANK|CIPS",
   "consent": "APPROVED",
   "uniqueTransactingId": "ACC_NO|WALLET_ID",
-  "fullName": "Anand Marasini",
+  "fullName": "Test User",
   "documentNumber": "39-12-4556336",
   "documentType": " CTZN|PASSPORT|DRIVING_LICENCE|NID|PAN ",
   "issuedDate": "2040-03-04",
@@ -98,7 +98,7 @@ his/her account before getting any xBorder request or after getting xBorder requ
     "instrument": "MB|IBANK|CIPS",
     "consent": "APPROVED",
     "uniqueTransactingId": "ACC_NO|WALLET_ID",
-    "fullName": "Anand Marasini",
+    "fullName": "Test User",
     "documentNumber": "39-12-4556336",
     "documentType": "PAN|NID",
     "bankCode": "1233"
