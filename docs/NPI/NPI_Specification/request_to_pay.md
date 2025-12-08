@@ -1622,7 +1622,7 @@ Third party application should web post to tokenization web gateway hosted at NC
         <tr>
             <td>6</td>
             <td>amount</td>
-            <td>Numeric (8,2)</td>
+            <td>String</td>
             <td></td>
             <td>Amount (only two digits after decimal point)</td>
             <td>M</td>
@@ -2344,7 +2344,19 @@ minutes of calling the stage payment API.
 </table>
 
 
+
+
 Token String= ”participantId+”,” + paymentToken +”,” + amount +”,” + appId +”, ” npiuserId” 
+**Sample Request:**
+```json
+{
+  "participantId": "SIDP1",
+  "paymentToken": "tlX+2VI+mdJ2mMYCFHCVaKsBjDF2pOYm5IbFIY3FxJzcBH4VEk/XA+Lin4js6JIy0XiAt36uORMy5QVQdj4aPI1JmJ4uEHIu+0ZDVSr5OxTVa8PQGGPn3jnlDM8bkNN2Hu1V7OuxsSOqXXgizD+wXkY4B6ckHLLyt3hQbdEIE4/22F/jfgMml2R4iwX/gFUNwLo8lHm/L82ekhhVAxgdoXtRCotl/NOuNRT2XnkED1FWtv5rf2fwA3HSPYHr6yC6",
+  "amount": 10,
+  "appId": "R2P-884-APP-1",
+  "token": "N9OXggNSKNq54GSgUaVfNEtmok/lR2jXG41VlvE+Lx1O25OV0qL2LLDQ5sTiZBcYalcFBtaL6Levq9byALNSup1nFCRres8BOH5UeNgNAH5QneW95FvADoVDigJk40MnH7CYElmAI4w30xZudTG/3Z3tImZl4pK+IiQLUGRMKlA="
+}
+```
 
 **Response parameters:**
 <table>
@@ -2461,6 +2473,24 @@ Token String= ”participantId+”,” + paymentToken +”,” + amount +”,”
 
 **Token String=** participantId+”,” + paymentToken +”,” + amount +”,” + appId +”,”+ debitStatus+”,”+ creditStatus+”,”+ 
 responseCode”,”+ npiuserId
+
+**Sample Response:**
+```json
+{
+    "responseCode": "000",
+    "responseMessage": "SUCCESS",
+    "participantId": "SIDP1",
+    "paymentToken": "tlX+2VI+mdJ2mMYCFHCVaKsBjDF2pOYm5IbFIY3FxJzcBH4VEk/XA+Lin4js6JIy0XiAt36uORMy5QVQdj4aPI1JmJ4uEHIu+0ZDVSr5OxTVa8PQGGPn3jnlDM8bkNN2Hu1V7OuxsSOqXXgizD+wXkY4B6ckHLLyt3hQbdEIE4/22F/jfgMml2R4iwX/gFUNwLo8lHm/L82ekhhVAxgdoXtRCotl/NOuNRT2XnkED1FWtv5rf2fwA3HSPYHr6yC6",
+    "debitStatus": "000",
+    "creditStatus": "DEFER",
+    "amount": 10,
+    "appId": "R2P-884-APP-1",
+    "token": "BrO4Jdp1ozGbgy2Mq/Wef1FbeNsVUwpufAc81Jf1887Zc6NwKAGoWu2mfy0BPF2QI2eCWc4eSN+QWift8BVluffkcNKAhSXdJ2SU2ZnP3gMFx8szU2AdmiAZMJUcLhjR7MKoAFBr7kTPHrMyxFmkuYbVyhZ7fiZLW+mqTU2k1D0=",
+    "txnId": 13559135,
+    "debitDescription": "SUCCESS",
+    "creditDescription": "SUCCESS"
+}
+```
 
 ### 10.2.4. Token Cancellation 
 A cancellation API will be available in NPI to cancel the e-Mandate token.
