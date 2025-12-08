@@ -2151,7 +2151,7 @@ NCHL will respond with the following parameters:
         <tr>
             <td>6</td>
             <td>amount</td>
-            <td>Numeric</td>
+            <td>String</td>
             <td>(8,2)</td>
             <td>Transaction amount</td>
             <td>M</td>
