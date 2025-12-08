@@ -181,7 +181,7 @@ additional fee for the customer.</td>
       <td>storeLabel</td>
       <td>String </td>
       <td>25</td>
-      <td>O </td>
+      <td>M </td>
       <td>Store label of the QR code.</td>
      </tr>
      <tr>
@@ -209,8 +209,16 @@ additional fee for the customer.</td>
       <td>Additional fields 1 to 10 for additional
 usages.</td>
      </tr>
-     <tr>
+          <tr>
       <td>18</td>
+      <td>qrImage</td>
+      <td>Boolen </td>
+      <td></td>
+      <td>C</td>
+      <td>false: QR string will be provided (by default) true: QR image will be provided.</td>
+     </tr>
+     <tr>
+      <td>19</td>
       <td>Token</td>
       <td>String </td>
       <td></td>
@@ -244,6 +252,7 @@ usages.</td>
    "purposeOfTransaction":"Bill payment",
    "additionalConsumerDataRequest":null,
    "loyaltyNumber":null,
+   "qrImage": false,
    "token":"PcK7JFPfEUvtGouuShjQgten7HQsAxxGVZJ+38ORzEOCEMV3Dlt7V0M7g+HUBfn0+oHZqAsb2pzTQHWEQPLmPOGR4lVEoy581vYmN5PfMLSQqb/UxixT1O4X6ZFeV9sVivP3Y1gVfILPIzRm2CfML4BTHhDlpNvoOQ840nvNn2E="
 }
 ```
@@ -410,6 +419,21 @@ The highlighted section above is the sub tag 51 of field 62 which is validation 
     }
 }
 
+```
+***Successful Response When qrImage Tag Is False:***
+```json
+{
+    "timestamp": "2022-05-23 04:25:26",
+    "responseCode": "000",
+    "responseStatus": "SUCCESS",
+    "responseMessage": "QR String generated successfully.",
+      "data": {
+      "validationTraceId":"2205260000001900KIY",
+      "qrString": "01021229270023NCHL0000170117012UVSTIR52045021530352454040.0056040.005802N
+      P5904BBSM6009Kathmandu6271010100306Khalti0709Terminal10812Bill payment512300192205260000001
+      900KIY6304607F”
+      }
+}
 ```
 
 
