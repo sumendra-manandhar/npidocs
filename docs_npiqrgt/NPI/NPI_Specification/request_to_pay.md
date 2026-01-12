@@ -1,9 +1,9 @@
 ---
-sidebar_position: 10
+sidebar_position: 9
 ---
 
 
-# 10. Request to Pay (Event Based and E-Mandate Based) 
+# 9. Request to Pay (Event Based and E-Mandate Based) 
 
 Request to pay is a pull type payment instrument, such that NPI will be enabled for such Request to Pay (R2P) 
 instruction as request and process between the members. Such R2P instruction can be Event based or E-mandate 
@@ -15,7 +15,7 @@ based on Payers confirmation, a credit transfer from Payer to Payee will be init
 initiated based on pre-authorized debit request by Payer as one-time setup, corresponding to which successive 
 transfer from Payer to Payee will be initiated on scheduled time or as and when required. 
 
-## 10.1. Event Based R2P
+## 9.1. Event Based R2P
 
 
  ![Example Image](/img/Event_based_R2P.png)
@@ -27,38 +27,38 @@ In order to facilitate “Request To Pay” a core-engine is developed. The acce
 channels such as connectIPS, mobile banking, PSPs and other third-party channels will be extended 
 through NPI. Further processing of debit transfer request will be done in core engine of request to pay. 
 
-**Process Flow**
-
+**Process Flow:**
+<ol><li>
 1. Payee initiates a “request to pay” request. 
+</li>
+<li>2. Payee agent sends the request to NPI. 
+</li>
+<li>3. NPI will perform technical and business validation of the request, checks security and sessions. 
+</li>
+<li>4. NPI will transmit the request to the R2P core engine. 
+</li>
+<li>5. R2P core engine will lodge the request. 
+</li>
+<li>6. It identifies the payer agent and transmits the request.
+</li>
+<li>7. Payer agent will provide “Request to Pay” notification to its user. 
+</li>
+<li>8. Once the user accepts or rejects the request, Payer Agent passes the message to NPI. 
+</li>
+<li>9. NPI will pass the message to R2P engine. 
+</li>
+<li>10. Request to pay engine will validate the message and confirm to NPI. 
+</li>
+<li>11. NPI will initiate the transaction and sends the notification to the R2P core engine. </li>
 
-2. Payee agent sends the request to NPI. 
-
-3. NPI will perform technical and business validation of the request, checks security and sessions. 
-
-4. NPI will transmit the request to the R2P core engine. 
-
-5. R2P core engine will lodge the request. 
-
-6. It identifies the payer agent and transmits the request.
-
-7. Payer agent will provide “Request to Pay” notification to its user. 
-
-8. Once the user accepts or rejects the request, Payer Agent passes the message to NPI. 
-
-9. NPI will pass the message to R2P engine. 
-
-10. Request to pay engine will validate the message and confirm to NPI. 
-
-11. NPI will initiate the transaction and sends the notification to the R2P core engine. 
-
-12. R2P core engine will send final notification to both payer and payee engine 
+<li>12. R2P core engine will send final notification to both payer and payee engine </li></ol>
 
 
 Members could be either payer agent or payee agent in the payment chain and exchange financial or non-financial message as below.
 
-### 10.1.1. Fetch Participant List 
+### 9.1.1. Fetch Participant List 
 
-Post Method:/r2p/v1/participants 
+**Post Method:** /r2p/v1/participants 
 
 **Request Parameters**
 
@@ -173,7 +173,7 @@ Post Method:/r2p/v1/participants
    "responseStatus":"SUCCESS"
 }
 ```
-### 10.1.2. Request from Payee Agent to NPI (Non-Financial Messages)
+### 9.1.2. Request from Payee Agent to NPI (Non-Financial Messages)
 
 **Post method:** /r2p/v1/request
 
@@ -573,7 +573,7 @@ Post Method:/r2p/v1/participants
 }
 ```
 
-### 10.1.3. Request from NPI to Payer Agent
+### 9.1.3. Request from NPI to Payer Agent
 
 Payer agent should support the following message format at their side to receive incoming request to pay 
 messages. URL and API credentials should be provided to be registered in Request To Pay core module. 
@@ -847,11 +847,7 @@ The API should be REST based and preferably implemented over OAuth2.0.
 }
 ```
 
-
-
-
-
-### 10.1.4. Response from Payer Agent to NPI 
+### 9.1.4. Response from Payer Agent to NPI 
 
 Payer agent should provide the following response on receiving the request message as in point 3. 
 
@@ -951,7 +947,7 @@ RESPONSEMESSAGE:responseMessage
 
  
 
-### 10.1.5. Request from Payer Agent to NPI (Financial Messages) 
+### 9.1.5. Request from Payer Agent to NPI (Financial Messages) 
 
 **Post method:** /r2p/v1/payment
 
@@ -1106,7 +1102,7 @@ RESPONSEMESSAGE:responseMessage
 
 
 
-### 10.1.6. From NPI to Payer agent Transaction Confirmation
+### 9.1.6. From NPI to Payer agent Transaction Confirmation
 
 **Response Parameters**
 
@@ -1319,7 +1315,7 @@ RESPONSEMESSAGE:responseMessage
 
 
 
-### 10.1.7. Request from NPI to payee agent – Transaction Confirmation 
+### 9.1.7. Request from NPI to payee agent – Transaction Confirmation 
 
 NPI makes a POST request to the payee agent on its API where transaction status information is sent. Such a 
 response must be saved by the payee at its end so that proper information is conveyed to the transaction initiating 
@@ -1507,7 +1503,8 @@ Transaction reports can be generated from the transaction reporting API mentione
 } 
 ```
 
-Token String: 
+**Token String:**
+
 REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,ACCEPTEDREJECTEDFLAG:acc 
 eptedRejectedFlag,PAYBATCHID:payBatchId,PAYTXNID:payTxnId,DEBITSTATUS:debitStatus,CREDITSTATUS:cre 
 ditStatus,AMOUNT:amount,SENDERNAME:senderName,PAYERMESSAGE:payerMessage 
@@ -1524,41 +1521,41 @@ ditStatus,AMOUNT:amount,SENDERNAME:senderName,PAYERMESSAGE:payerMessage
 }
 ```
 
-Token String: 
+**Token String:**
 REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,RESPONSECODE:responseCode, 
 RESPONSEMESSAGE:responseMessage
 
 
-## E-Mandate/Account Tokenization Based R2P
+## 9.2. E-Mandate/Account Tokenization Based R2P
 
 **Process Flow**
-
+<ol><li>
 1. E-Mandate is a tokenized digital consent authorized by Payer (debtor) allowing a Payee (creditor/ 
 beneficiary party) to debit an amount from the specified Payer’s debit account at predefine date or 
-on request as set in the e-Mandate. 
-2. Pre-requisite for initiating and processing R2P is that the Payee Agent will have to enable e-Mandate 
+on request as set in the e-Mandate. </li>
+<li>2. Pre-requisite for initiating and processing R2P is that the Payee Agent will have to enable e-Mandate 
 based R2P in its channel/ instrument which will be integrated with e-Mandate Tokenization Gateway 
 to obtain tokenized e-Mandate. E-Mandate is mandatory for initiating and processing direct debit 
-transactions. 
-3. Payer will setup and authorize one-time e-Mandate through a channel provided by its Payer Agent 
-(which could be indirect/ technical member or service provider). 
-4. The Payer will verify the details and then completes authentication and authorization through e-Mandate Tokenization Gateway available at Payer Agents channel. 
-5. Payer Agent channel will then receive a tokenized e-Mandate, which will be used to honor all future 
-R2P requests against the mandate. 
-6. On due date or upon request, the Payee or Payee Agent will initiate a R2P request (debit instruction) 
+transactions. </li>
+<li>3. Payer will setup and authorize one-time e-Mandate through a channel provided by its Payer Agent 
+(which could be indirect/ technical member or service provider). </li>
+<li>4. The Payer will verify the details and then completes authentication and authorization through e-Mandate Tokenization Gateway available at Payer Agents channel. </li>
+<li>5. Payer Agent channel will then receive a tokenized e-Mandate, which will be used to honor all future 
+R2P requests against the mandate. </li>
+<li>6. On due date or upon request, the Payee or Payee Agent will initiate a R2P request (debit instruction) 
 based on the authorized mandate details using e-Mandate token, financial message token, debit 
-amount, payee app id and other payment information. 
-7. NPI will authenticate the Payee Agent (as member) and then validate the request prior to debiting 
-the payer account and crediting the payee account. 
-8. Based on nature of transaction or channel used, Payer Agent may add control for additional 
+amount, payee app id and other payment information. </li>
+<li>7. NPI will authenticate the Payee Agent (as member) and then validate the request prior to debiting 
+the payer account and crediting the payee account. </li>
+<li>8. Based on nature of transaction or channel used, Payer Agent may add control for additional 
 authentication (like OTP or authenticator-based code or similar) that may be required to complete 
 the financial transaction. Such OTP generation as additional control will be the responsibility of the 
-Payer Agent. 
-9. The transaction status will then be transmitted to Payee Agent and Payee.
-
+Payer Agent. </li>
+<li>9. The transaction status will then be transmitted to Payee Agent and Payee.</li>
+</ol>
 Third party application should web post to tokenization web gateway hosted at NCHL with the parameters listed in the following table. 
 
-### 10.2.1. Tokenization Gateway 
+### 9.2.1. Tokenization Gateway 
 
 **URL:**{base_url}/tokenization-gw/loginpage
 
@@ -1684,9 +1681,10 @@ Third party application should web post to tokenization web gateway hosted at NC
     </tbody>
 </table>
 
-
+```json
 Token String= participantId+”,” + identifier+”,” + userIdentifier +”,” + mobileNo+”,” +email+”,” +amount+”,” 
 +debitType+”,” +frequency+”,” +mandateStartDate+”,” + mandateExpiryDate
+```
 
 After successful request validation, the user is prompted for further processing. In case of connectIPS user, 
 s/he provide his credentials to get into the connectIPS channel. After successful login the user will be 
@@ -1861,9 +1859,10 @@ authentication and authorization mechanism will be implemented.
     </tbody>
 </table>
 
-
+```json
 Token String= participantId+”,” + identifier+”,” + userIdentifier +”,” + mobileNo+”,” +email+”,” +amount+”,” 
 +debitType+”,” +frequency+”,” +mandateStartDate+”,” + mandateExpiryDate+”,” + mandateToken+”,”+ mandateTokenType 
+```
 
 **Sample Request from NCHL:** 
 ```json
@@ -1919,7 +1918,7 @@ Following is a successful response sample from third party system to NCHL for ge
 
 
 
-### 10.2.2. Stage payment
+### 9.2.2. Stage payment
 
 In order to initiate payment request in NPI, payee participant channel should first obtain payment token from 
 the e-Mandate token.
@@ -2039,9 +2038,10 @@ the e-Mandate token.
     </tbody>
 </table>
 
-
+```json
 Token String= ”participantId+”,” + mandateToken +”,” + userIdentifier +”,” + amount +”,” + appId +”,” + instructionId+”,” + refId +”,”+ npiuserId”
-  
+  ```
+
 **Sample Request:**
 ```json
 {
@@ -2262,11 +2262,11 @@ NCHL will respond with the following parameters:
     </tbody>
 </table>
 
-
+```json
 Token String = participantId+”,”+paymentToken+”,”+amount+”,”+appId+”,”+instructionId+”,”+ 
 secondaryAuthorizationRequired +”,” + responseCode ”,”+ npiuserId
-
-## 10.2.3. Request payment 
+```
+### 9.2.3. Request payment 
 With the payment token received in the response, a new request should be made in the below API within 
 stipulated time. Current time limitation is 5 minutes i.e., request payment API has to be called within 5 
 minutes of calling the stage payment API. 
@@ -2345,8 +2345,9 @@ minutes of calling the stage payment API.
 
 
 
-
+```json
 Token String= ”participantId+”,” + paymentToken +”,” + amount +”,” + appId +”, ” npiuserId” 
+```
 **Sample Request:**
 ```json
 {
@@ -2470,10 +2471,10 @@ Token String= ”participantId+”,” + paymentToken +”,” + amount +”,”
     </tbody>
 </table>
 
-
-**Token String=** participantId+”,” + paymentToken +”,” + amount +”,” + appId +”,”+ debitStatus+”,”+ creditStatus+”,”+ 
+```json
+Token String= participantId+”,” + paymentToken +”,” + amount +”,” + appId +”,”+ debitStatus+”,”+ creditStatus+”,”+ 
 responseCode”,”+ npiuserId
-
+```
 **Sample Response:**
 ```json
 {
@@ -2492,7 +2493,7 @@ responseCode”,”+ npiuserId
 }
 ```
 
-### 10.2.4. Token Cancellation 
+### 9.2.4. Token Cancellation 
 A cancellation API will be available in NPI to cancel the e-Mandate token.
 
 **POST URL:** {base_url}/tokenization/cancel
@@ -2572,10 +2573,10 @@ A cancellation API will be available in NPI to cancel the e-Mandate token.
     </tbody>
 </table>
 
-
+```json
 Token String= participantId+”,” + identifier+”,” + userIdentifier +”,” +mandateToken+”,” + cancelReasonCode” +”,” + 
 npiuserId” 
-
+```
 **Sample Request:**
 ```json
 { 
@@ -2680,10 +2681,8 @@ npiuserId”
 
 
 ```json
-
 Token String= participantId+”,” + identifier+”,” + userIdentifier +”,” +mandateToken+”,” + cancelReasonCode+”,” + 
 responseCode+”,”+ npiuserId”
-
 ```
 
 **Sample Response:**
@@ -2701,7 +2700,7 @@ responseCode+”,”+ npiuserId”
 } 
 ```
 
-### 10.2.5. Re-new Token
+### 9.2.5. Re-new Token
 A re-new API is available in NPI to renew the expired e-Mandate token. The condition for this is that the mandate token should be expired. 
 
 **POST URL:** /tokenization/renew 
@@ -2912,12 +2911,14 @@ Token String= participantId+”,” + mandateToken+”,” + NPIUserId”
 
 
 
-### 10.2.6. Exception Handling
+### 9.2.6. Exception Handling
 Following exceptions must be handled at the technical member’s end: 
-1. If a transaction is debit success and credit failed. New payment has to be initiated (requestPayment api has to 
+
+<ol>
+<li>1. If a transaction is debit success and credit failed. New payment has to be initiated (requestPayment api has to 
 be called again). Reversal of the transaction takes place in case of debit success and credit failed which is 
-handled from connectIPS end. 
-2. If a transaction is debit success and credit timeout (999), then no initiation of a new payment is to be done. If a 
+handled from connectIPS end. </li>
+<li>2. If a transaction is debit success and credit timeout (999), then no initiation of a new payment is to be done. If a 
 transaction is not debit successful (000) in the response of request Payment API, then new transaction 
-must be created.
+must be created.</li></ol>
 

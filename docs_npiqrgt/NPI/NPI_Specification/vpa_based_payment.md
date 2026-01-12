@@ -1,8 +1,8 @@
 ---
-sidebar_position: 8
+sidebar_position: 7
 ---
 
-#  8. Virtual Payment Address (VPA) Based Payment 
+#  7. Virtual Payment Address (VPA) Based Payment 
 
 A Virtual Payment Address (VPA) is a unique identifier that resolves the bank account details and 
 facilitate for the payment even without knowing beneficiary account details. It acts as an ID independent 
@@ -13,32 +13,36 @@ the fund to the beneficiary account based on the VPA. For now, registered mobile
 connectIPS system and PSPs wallet has been considered as a virtual payment address. 
 The VPA address can also be any unique id provided by the other service provided like PSPs, etc. Below 
 are the some of the pre-requisites to the NPI members for participating VPA based payment ecosystem. 
-1. The participating member has to be integrated with NPI for VPA based payments. 
-2. Unique id has to be provided by any service providers like Bank, PSPs and connectIPS system. 
-3. In case of connectIPS VPA based payment, user has linked the account in connectIPS system and 
-set the primary account to receive the fund. 
-4. The mobile number of the connectIPS user must match with the mobile number present at the KYC 
-of the transaction receiving bank of the receiver.
+
+<ol>
+<li>1. The participating member has to be integrated with NPI for VPA based payments. </li>
+<li>2. Unique id has to be provided by any service providers like Bank, PSPs and connectIPS system. </li>
+<li>3. In case of connectIPS VPA based payment, user has linked the account in connectIPS system and 
+set the primary account to receive the fund. </li>
+<li>4. The mobile number of the connectIPS user must match with the mobile number present at the KYC 
+of the transaction receiving bank of the receiver.</li>
+</ol>
 
 
-
-## 8.1. Process Flow 
+## 7.1. Process Flow 
 
 With the current implementation, VPA based payments can be initiated either direct to the bank providing 
 the beneficiary registered mobile number in banks KYC or through connectIPS system. 
+
+<ol><li>
 1. Sender initiates the VPA based payment by providing the sender mobile number registered in banks 
 KYC. In case of connectIPS system based VPA payment, recipient should have linked account in 
-connectIPS system and set as primary. 
-2. The VPA engine resolves the corresponding bank account details based on the mobile number 
-provided by the sender. 
-3. Sender will get the beneficiary account number and name with masking to make sure the correctness 
-of recipient. 
-4. After sender confirms that payment, it will follow the normal payment flow where sender account will 
+connectIPS system and set as primary. </li>
+<li>2. The VPA engine resolves the corresponding bank account details based on the mobile number 
+provided by the sender. </li>
+<li>3. Sender will get the beneficiary account number and name with masking to make sure the correctness 
+of recipient. </li>
+<li>4. After sender confirms that payment, it will follow the normal payment flow where sender account will 
 be debited and beneficiary account will be credited. In case of VPA based payment initiated from 
-PSPs respective wallet, pool account will be debited and beneficiary account will be credited. 
-5. After payment is successful, notification is sent back to the sender.
-
-
+PSPs respective wallet, pool account will be debited and beneficiary account will be credited. </li>
+<li>5. After payment is successful, notification is sent back to the sender.
+</li>
+</ol>
 
 ![Example Image](/img/VPA_Process_flow_Diagram.png)
 <p align="center" class="centered-caption"></p>
@@ -47,7 +51,7 @@ Figure:Process flow diagram for VPA
 
 
 
-## 8.2. Fetch Participant Details
+## 7.2. Fetch Participant Details
  
 
  Virtual Payment Address (VPA) based payments can be made to the three types of participants namely 
@@ -61,17 +65,13 @@ participants in VPA based payment network.
 { 
 "type":"ALL" 
 } 
-
 ```
 
- **Network Type** 
-ALL: Fetch the list of all participants in VPA based payment network. 
-
-BANK: Fetch the list of banks available for VPA based payment. 
-
-CIPS: connectIPS system 
-
-PSP: Fetch the list of wallets available for VPA based payment. 
+ **Network Type:** <br/>
+ ALL: Fetch the list of all participants in VPA based payment network. <br/>
+BANK: Fetch the list of banks available for VPA based payment. <br/>
+CIPS: connectIPS system <br/>
+PSP: Fetch the list of wallets available for VPA based payment. <br/>
 
 
 **Sample Response**
@@ -109,9 +109,9 @@ PSP: Fetch the list of wallets available for VPA based payment.
 
 ```
 
-Note: For VPA based transaction, code of this sample response to be used as bankId in next API. 
+**Note:** For VPA based transaction, code of this sample response to be used as bankId in next API. 
 
-## 8.3. Fetch Account Details
+## 7.3. Fetch Account Details
 
 Before making the VPA based transactions, payment detail has to be fetched from respective systems with corresponding unique identifier (VPA).
 
@@ -167,9 +167,9 @@ Before making the VPA based transactions, payment detail has to be fetched from 
 </table>
 
 
-
-**Token String=** originatorUniqueId+”,” +vpa+”,” + bankId +”,” + userId 
-
+```json
+Token String= originatorUniqueId+”,” +vpa+”,” + bankId +”,” + userId 
+```
 **Response Parameters**
 <table>
     <thead>
@@ -243,10 +243,10 @@ Before making the VPA based transactions, payment detail has to be fetched from 
 </table>
 
 
-
-**Token String ** =requestIdentifier+ “,” +originatorUniqueId+ “,” +vpa+ “,” + 
+```json
+Token String  =requestIdentifier+ “,” +originatorUniqueId+ “,” +vpa+ “,” + 
 bankId + “,” + acctName + “,” + accountId + “,” + userId 
-
+```
 
 **Sample Request**
 ```json
@@ -312,7 +312,7 @@ bankId + “,” + acctName + “,” + accountId + “,” + userId
 }
  ```
 
- ## 8.4. Transaction Posting
+ ## 7.4. Transaction Posting
 
  After the payment details are fetched successfully from the respective system, payment has to be 
 confirmed with following details. The beneficiary details like account number, name or wallet user id will 
@@ -426,11 +426,11 @@ be provided in masked format for user confirmation before submitting the payment
     </tbody>
 </table>
 
-
+```json
 
 Token String = originatorUniqueId+ “,” +requestIdentifier+ “,” + vpa+ “,” +bankId+ “,” +debtorAgent+”,” + 
 debtorBranch+ “,” + debtorAccountId+ “,” + amount+ “,” + userId 
-
+```
 **Response Parameters**
 
 <table>
@@ -512,10 +512,10 @@ debtorBranch+ “,” + debtorAccountId+ “,” + amount+ “,” + userId
     </tbody>
 </table>
 
-
+```json
 Token String=originatorUniqueId+ “,” +requestIdentifier+ “,” + vpa+ “,” + debitStatus+ “,” +npiBatchId+ “,” + 
 npiTransactionId+ “,” + userId 
-
+```
 **Sample Request**
 ```json 
 {
@@ -548,7 +548,7 @@ npiTransactionId+ “,” + userId
    "token":"Aa0BI2HDB6OcfPleNbh5/******……………****** +rXobHMrWWFJYpcQ3NlGfRL/Ag="
 }
 ```
- Note: For the finality of VPA based payment, kindly consider debit status (000) and credit status (000, DEFER,999). 
+ **Note:** For the finality of VPA based payment, kindly consider debit status (000) and credit status (000, DEFER,999). 
 
 
 **Failure Response** 
@@ -579,9 +579,9 @@ npiTransactionId+ “,” + userId
 }
 ```
 
-## 8.5. VPA Transaction Reporting
+## 7.5. VPA Transaction Reporting
 
-### 8.5.1. By Date: Transaction reporting allows NPI users to fetch reports within period of 90 days.
+### 7.5.1. By Date: Transaction reporting allows NPI users to fetch reports within period of 90 days.
 
 **POST URL:** /vpa/transaction/detail
 
@@ -664,7 +664,7 @@ npiTransactionId+ “,” + userId
 }
 
 ```
-### 8.5.2. By Originator Unique Id: Transaction details are queried based on originator unique id.
+### 7.5.2. By Originator Unique Id: Transaction details are queried based on originator unique id.
 
 **POST URL:** /vpa/transactiondetailbyid
 

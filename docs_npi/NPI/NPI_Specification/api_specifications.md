@@ -5,42 +5,170 @@ sidebar_position: 5
 
 # 5. API Specifications
 
-## 5.1. Authentication and Authorization
+## 5.1. API Security Guidelines for NPI Integration
+The National Payment Interface APIs are secured  through the following best practices to reinforce the industry security standard:
+
+•	Token-based Access Control <br/>
+•	Digital Signature
+
+### 5.1.1 Token-based Access Control
+
+The primary API authentication method is OAuth2 framework using Access Tokens. The OAuth 2.0
+authorization framework is a protocol that allows a third-party application access to the protected
+resources, without necessarily revealing their long-term credentials or even their identity. The client needs to
+provide client specific credentials (Basic authentication) in the authorization header and user credentials (User authentication) in the body with grant type as
+password for refresh and access token pair generation on the first stage or during refresh token expiration.
+
+⚠️These tokens contain API access privileges, they must be kept secretly.
+
+**API Authorization:**
+
+The generated access token by one of the above methods can be used to access the available resources. This
+can be done by setting the Authorization HTTP Header value as <b>Bearer [access token]</b>.
+
+The default expiration time for the access token is <b>300</b> seconds, and for the refresh token, it is <b>12 hours</b>.
+
+A dynamic method for retrieving new tokens is to be applied. For example, if the access token
+expires or is invalid, you will receive a <b>401 Unauthorized</b> response. If the refresh token is expired or invalid, you
+will receive a <b>400 Bad Request</b> response.
+
+**Auth API Endpoints:** 
+
+We provide one primary API endpoint to obtain the access token. This endpoint supports two Authorization
+Grant methods:
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Grant Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/oauth/token</td>
+      <td>password</td>
+      <td>Retrieve <b>Access Token</b> and <b>Refresh Token</b> using the provided API username/password and client credentials.</td>
+    </tr>
+    <tr>
+      <td>/oauth/token</td>
+      <td>refresh_token</td>
+      <td>Retrieve  <b>Access Token</b> using the corresponding <b>Refresh Token</b> only.</td>
+    </tr>
+  </tbody>
+</table>
 
 
-OAuth 2.0 API authentication mechanism has been implemented for authentication and authorization 
-process in NPI. The client needs to provide client specific credentials in the authorization header and 
-user credentials in the body with grant type as password for token generation on first login or during 
-refresh token expiration.
+**Method to generate & use access and refresh token:**
 
-On successful authentication, system will provide access token and refresh token pair. Access tokens 
-are used for accessing the resources and refresh tokens are used for renewal of access tokens. Validity 
-of access token is 30 seconds and validity of refresh token is 12 hours (which may vary as per NCHL 
-Policy). Access tokens could be obtained by using non-expired refresh tokens in the body with grant 
-type as refresh token. 
+<ol>
+<li>
+1. Use the provided basic authentication credentials along with the API username/password and set the
+grant type as password to obtain a refresh token. The refresh token will have a longer validity period
+(e.g., 12 hours), so store it for future access token retrieval. It is strictly prohibited to use access token
+obtained during this initial request.</li>
+<li>
+2. Use the stored refresh token from step #1 to generate a new access token, setting the grant type as
+refresh_token and using basic authentication credentials only. Access tokens are valid for a short
+period (e.g., 300 seconds). Use this access token to make resource requests within this time. Once the
+access token expires, re-request a new access token using the stored refresh token.</li>
+<li>
+3. When the refresh token expires, repeat the process from step 1.</li>
+<li>
+4. Pass the new access token as a Bearer Token in the Authorization header when accessing API resources.</li>
 
+<li>
+5. Token renewal can generally be based on the expiry time of both the access token (e.g., after 300
+seconds) and refresh token (e.g., after 12 hours). However, relying solely on fixed expiry times for token
+renewal is insufficient due to time gaps between the expiry and renewal and for seamless API access.
+Instead, you should initiate the renewal process based on the API’s response codes, which can indicate
+that the tokens are no longer valid.
+</li>
 
+<li>
+6. When the access token has expired or is invalid, the API will return a 401 Unauthorized response. In
+this case, immediately use the stored refresh token (from step #1 above) to obtain a new access token.</li>
 
-Method to generate & use access and refresh token
+<li>
+7. If the refresh token itself has expired, it must be renewed before you can obtain a new access token.
+Attempting to use an expired or invalid refresh token will result in a 400 Bad Request response. In such
+cases, renew the refresh token first (step #1 above) before proceeding with the access token request
+(step #2 above).</li>
+</ol>
 
+<br />
 
+ **POST URL For Authentication:/oauth/token**
+## 5.2. Digital Signature
 
-1. Use the provided basic authentication credentials along with username/password and grant type as 
-password to obtain a refresh token. Refresh token has validity of 12 hours for now, so store the 
-refresh token for future access token requests. Do not use the access token obtained during this 
-initial request. 
+Message/token signing in NPI integration is a crucial security mechanism that involves adding a unique digital signature token to each request and response payload, ensuring the authenticity, non-repudiation and integrity of the transmitted data. This process relies on cryptographic algorithms and shared keys to generate and verify these signatures, preventing unauthorized access, data tampering, and enhancing trust between NPI and its members.
+ 
+A signature token is generated taking the financial information from the request & response payload. The token is further digitally signed by the client’s private key (pfx) using SHA256withRSA algorithm. The resulting signed token is encoded in base 64 format and include in “token” tag within request and response payloads.
+ 
+Below is the high level proces flow for creating and requesting the digital certificate for the message signing purpose.
 
-2. Use the stored refresh token obtained from step 1 to generate new access token putting grant type 
-as refresh token. Access tokens are valid for 300 seconds. Use the obtained access token for 
-resources requests within this period to access every endpoint in NPI. On expiry of access token re-request using the stored refresh token. 
+<b>Step 1:</b> Create Keystore and Generate CSR file:
+<br/><br/>
 
-3. On expiry of refresh token, repeat the process from step 1. 
+``` bash
+keytool -genkey -keysize 2048 -keyalg RSA -sigalg SHA256withRSA -alias TEST -keystore TEST.jks
 
-POST URL For Authentication: **/oauth/token**
+Enter keystore password: yourpassword
+Re-enter new password: yourpassword
+What is your first and last name: TEST
+What is the name of your organizational unit: TEST
+What is the name of your organization: TEST
+What is the name of your city or locality: Kathmandu
+What is the name of your state of province: Bagmati
+What is the two-letter country code for this unit: NP
+Is CN= TEST TEST, OU= TEST, O=TEST, L=Kathmandu,ST=Kathmandu, C=NP correct? yes
+Enter key password for <TEST>: yourpassword   
+Re-enter new password: yourpassword
 
+keytool -certreq -alias TEST -keyalg RSA -file TEST.csr -sigalg SHA256withRSA -keystore TEST.jks
+ ```
 
-## 5.2. Account Validation
+<b>Step 2:</b> Check that a Keystore was created <br/><br/>
 
+```bash
+keytool -list -v -keystore TEST.jks -alias TEST
+Enter keystore password:
+ ```
+
+ **Note:**
+ <ul>
+    <li> - PLEASE SHARE THE GENERATED .csr FILE TO NCHL AFTER THIS 2ND STEP!!!</li>
+    <li> - Continue below steps after receiving TEST.cer file from NCHL. This TEST.cer file is used for signature verification of request payload sent by NCHL for NPI.</li>
+</ul>
+
+<b>Step 3: </b>Import .cer and NCHL root and issuer CA to keystore (NCHL root/issuer CA are attached herewith)
+<br/><br/>
+
+```bash
+keytool -importcert -keystore TEST.jks -alias nchlrootca -file nchlrootca_2022.crt
+keytool -importcert -keystore TEST.jks -alias nchlissuerca -file nchlissuerca_2022.crt
+keytool -importcert -keystore TEST.jks -alias TEST -file TEST.cer
+
+## <BASEURL>.cer is the SSL certificate. A different SSL certificate will be provided by NCHL.
+## not required for testing
+
+keytool -importcert -keystore TEST.jks -alias <BASEURL> -file <BASEURL>.cer
+ ```
+ <b> Step 4:</b> Convert keystore to PFX file.
+ <br/><br/>
+
+```bash
+keytool -importkeystore -srckeystore TEST.jks –destkeystore TEST.p12 -deststoretype PKCS12 –srcalias TEST -srcstorepass *** -deststorepass *** -destkeypass ***
+keytool -v -importkeystore -srckeystore TEST.jks -srcalias TEST -destkeystore TEST.p12 -deststoretype PKCS12
+openssl pkcs12 -in TEST.p12 -nocerts -out TEST.pem -nodes
+openssl pkcs12 -export -in TEST.pem -inkey TEST.pem -out keystore.p12 -name your_alias -CAfile ca-chain.pem -caname root
+
+###Use this .p12 file (Convert it to .pfx) for signature generation.
+ ```
+
+ **Note:** <i> Upon expiry of the certificate , repeat the same process of the certificate generation.</i>
+
+## 5.3. Account Validation
 
 Account validation is used for validating creditor account before initiating the actual transaction. 
 Validating creditor account beforehand reduces the transactions rejection ratio. After the account is 
@@ -48,10 +176,7 @@ validated the actual financial transactions APIs are required to be called. It v
 account, status and account name match details. This section describes the required information for 
 account validation through NPI. 
 
-
 **POST URL: /api/validatebankaccount**
-
-
 
 **Request Parameter:**
 
@@ -315,7 +440,7 @@ NPI. </td>
 </table>
 
 
-## 5.3. Transaction APIs 
+## 5.4. Transaction APIs 
 
 
 NPI supports real time and non-real time transactions. Both the debit and credit legs are completed in a 
@@ -323,15 +448,14 @@ single session in real time transaction. Whereas, in non-real time transaction, 
 real-time but credit leg(s) are completed on deferred basis. Following are the API details of the 
 transactions supported in NPI. 
 
-### 5.3.1. Real Time Transactions (postcipsbatch) 
+### 5.4.1. Real Time Transactions (postcipsbatch) 
 
 This API is used for posting fund transfer transaction in ***connect***IPS e-Payment system in real time basis. 
 Since the nature of transaction is real time, the postcipsbatch method can contain only single transaction 
 in a batch. The execution of both debit and credit legs happens in a real time and provides the response 
 accordingly within a single session. Below is the process flow diagram for the postcipsbatch method.
 
-
-## Process Flow:
+**Process Flow:**
 
 
 1. Initiating participant will push the transactions to NPI. Such transaction can be only one-to-one. 
@@ -373,8 +497,9 @@ is successful at the creditor bank, the transaction status will be updated as 00
 8. Initiating participant can fetch the transaction details using transaction reporting API at any point of 
 time.
 
+<br/>
 
-POST URL: **/api/postcipsbatch**
+**POST URL: /api/postcipsbatch**
 
 Following points should be consider while posting the transactions through postcipsbatch. 
 1. Both debtor and creditor bank should be the member of connectIPS e-Payment system. 
@@ -392,9 +517,9 @@ transaction limit of NCHL-IPS).
 6. Allowed category purpose for postcipsbatch is ECPG.
 
 
+<br/>
 
 **Request Parameters:**
-
 
 The request parameters for this method are created to align the format of ISO 
 20022 message format which is currently being used in NCHL-IPS system. Hence the payment 
@@ -749,8 +874,8 @@ of category purpose. </td>
 
 
 **Token Generation Process:**
-
-1. Token string generation 
+<ol>
+<li>1. Token string generation 
 The token string is created by appending the financial fields in batch and transactions information. Following 
 will be the procedure for token string generation: 
 
@@ -766,12 +891,15 @@ will be the procedure for token string generation:
 <pre><code parentName="pre"{...{"className":"language-json"}}>
 {'Token String=Batch String + Transaction String+","+<user Id>'}</code></pre>
 
-
+</li>
+<li>
 2. Sign the message token from step 1 using the digital certificate private key (pfx file/keystore). The digital 
-signature algorithm will be the SHA256withRSA. 
-3. Convert the signed token above in step 2 to base64 encoding. 
-4. Pass this signature string to the “token” field of the request message. 
+signature algorithm will be the SHA256withRSA. </li>
+<li>
+3. Convert the signed token above in step 2 to base64 encoding. </li>
+<li>4. Pass this signature string to the “token” field of the request message.</li> 
 
+</ol>
 
 **Expected Status Codes:** 
 OK 
@@ -965,7 +1093,7 @@ Transaction Details:
 
 ```
 
-### 5.3.2. Non-Real Time Transactions (postnchlipsbatch) 
+### 5.4.2. Non-Real Time Transactions (postnchlipsbatch) 
 This postipsbatch is used for posting non-real time fund transfer transactions through NCHL-IPS System. 
 It handles both the cases of single transaction and batch-based credit transactions. However, the debit 
 of the batch amount will be executed instantly. And once the debit is successful, transaction will be 
@@ -1008,8 +1136,9 @@ time.
 9. Beneficiary accounts will be credited once the bank Nostro settlement is competed at Nepal Rastra 
 Bank. The number of settlements and timing will be as per the NCHL-IPS operating procedure (which 
 are currently at 12:30 PM, 1:30 PM, 2:30 PM and 4:00 PM)
+<br/>
 
-POST URL: **/api/postnchlipsbatch**
+**POST URL: /api/postnchlipsbatch**
 
 Following points should be consider while posting the transactions to postnchlipsbatch. 
 1. Debtor bank must be the member of connectIPS e-Payment system however creditor bank can be 
@@ -1020,6 +1149,7 @@ is based on the category purposes. Addenda information are also mandatory for so
 category purpose (refer to product note for details). 
 4. Number of transactions within a batch (batch limit) is 10,000. 
 
+<br/>
 
 **Request Parameters:** 
 
@@ -1347,8 +1477,8 @@ beneficiary bank.
 </table>
 
 **Token Generation Process:**
-
-1. Token string generation 
+<ol>
+<li>1. Token string generation 
 The token string is created by appending the financial fields in batch and transactions information. Following 
 will be the procedure for token string generation: 
 
@@ -1365,24 +1495,20 @@ For each transaction
 
 <pre><code parentName="pre"{...{"className":"language-json"}}>{' Token String: <BatchString>,<TransactionString>,<userId>'}</code></pre>
 
+</li>
+<li>
+2. Generate signed hash value of token string using private key of provided certificate. </li><li>
+3. Send the generate hash value in “token” field.</li></ol>
+<br/>
 
+**Expected Status Codes:**<br/>
+OK <br/>
+BadRequest <br/>
+InternalServerError <br/>
+NotFound <br/>
+Forbidden <br/>
 
-2. Generate signed hash value of token string using private key of provided certificate. 
-3. Send the generate hash value in “token” field.
-
-
-Expected Status Codes: 
-OK 
-
-BadRequest 
-
-InternalServerError 
-
-NotFound 
-
-Forbidden 
-
-**RequestMessage Example (Single Batch):** 
+**Request Message Example (Single Batch):** 
 ```json
 {
   "nchlIpsBatchDetail": {
@@ -1427,7 +1553,9 @@ Forbidden
 }
 
 ```
-**RequestMessage Example (Multiple Batch):** 
+
+
+**Request Message Example (Multiple Batch):** 
 ```json
 {
    "nchlIpsBatchDetail":{
@@ -1443,7 +1571,7 @@ Forbidden
       "debtorIdType":"0001",
       "debtorIdValue":"123456",
       "debtorAddress":"Kathmandu Nepal",
-      "debtorPhone":"+977-01-4255306",
+      "debtorPhone":"+977-01-425****",
       "debtorMobile":"+977-98********",
       "debtorEmail":"test@test.com"
    },
@@ -1485,7 +1613,6 @@ Forbidden
 }
 
 ```
-
 
 **Response Parameters** 
 
@@ -1628,7 +1755,7 @@ Forbidden
   ]
 }
 ```
-### 5.3.3. Aggregated Service APIs 
+### 5.4.3. Aggregated Service APIs 
 
 These are related to the consolidated service APIs of the creditors including Government, 
 SemiGovernment, large corporates and other creditors/merchants that are enrolled by the member BFIs 
@@ -1638,15 +1765,16 @@ of NCHL and then extended to the others for integrating in their channels.
 Refer to the separate NPI Aggregated Service API document for further details. 
 
 
-## 5.4. Transaction Reporting APIs 
+## 5.5. Transaction Reporting APIs 
 
 For reporting and reconciliation of the transactions which are processed through NPI, the following APIs 
 will be provided. These APIs will also require the access token to access the resources and the token 
 generation process will be same as for the transaction processing. 
 
-Based on transactions date: These APIs provide the list of transaction details based on the provided 
-date range. 
-**/api/getcipstxnlistbydate** --> For cips transactions. 
+**Based on transactions date:** 
+These APIs provide the list of transaction details based on the provided 
+date range. <br/>
+**/api/getcipstxnlistbydate** --> For cips transactions. <br/>
 **/api/getnchlipstxnlistbydate** --> For ips transactions. 
 
 **Sample request message:**
@@ -1658,9 +1786,10 @@ date range.
 ```
 
 
-Based on batch Id: These APIs provide the transaction details based on the batch id 
+**Based on batch Id:** 
+These APIs provide the transaction details based on the batch id 
 
-**/api/getcipstxnlistbybatchid** --> For cips transactions. 
+**/api/getcipstxnlistbybatchid** --> For cips transactions. <br/>
 **/api/getnchlipstxnlistbybatchid** --> For ips transactions. 
 
 **Sample request message:**
@@ -1671,8 +1800,8 @@ Based on batch Id: These APIs provide the transaction details based on the batch
 }
 ```
 
-Based on Instruction Id: These APIs provide the transaction details based on the instruction id and batch id. 
-**/api/getcipstxnbyinstructionid** --> For cips transactions. 
+**Based on Instruction Id:**  These APIs provide the transaction details based on the instruction id and batch id. <br/>
+**/api/getcipstxnbyinstructionid** --> For cips transactions. <br/>
 **/api/getnchlipstxnlistbyinstructionid** --> For ips transactions. 
 
 
@@ -3214,11 +3343,11 @@ NCHL for ACH routing. </td>
 
 Note: Only debit/credits status related information are shown above. Rest of the parameters will be same as above
 
-## 5.5. Other APIs 
+## 5.6. Other APIs 
 
 Below are the lists of other supporting APIs to extract the list and/or setups from the core system. 
 
-1. **/api/getbranchlist:** To get the branch list for both ips. 
+**1. /api/getbranchlist:** To get the branch list for both ips. 
  
 **Sample Response:**
 ```json
@@ -3236,7 +3365,7 @@ Below are the lists of other supporting APIs to extract the list and/or setups f
 ]
 
 ```
-2. **/api/getcipsbranchlist:** To get the branch list for both cips.
+**2. /api/getcipsbranchlist:** To get the branch list for both cips.
 
 **Sample Response:**
 ```json
@@ -3254,7 +3383,7 @@ Below are the lists of other supporting APIs to extract the list and/or setups f
 ]
 
 ```
-3. **/api/getcipsbanklist:** To get the CIPS bank list 
+**3. /api/getcipsbanklist:** To get the CIPS bank list 
 
 **Sample Response:**
 
@@ -3275,7 +3404,7 @@ Below are the lists of other supporting APIs to extract the list and/or setups f
 ]
 
 ```
-4. **/api/getbanklist:** To get the IPS bank list. 
+**4. /api/getbanklist:** To get the IPS bank list. 
 
 
 **Sample Response:**
@@ -3295,7 +3424,7 @@ Below are the lists of other supporting APIs to extract the list and/or setups f
 
 
 
-5. **/api/getbranchlist/{bankId}:** To get the branch list of the provided bank. 
+**5. /api/getbranchlist/{bankId}:** To get the branch list of the provided bank. 
 Eg: /getbranchlist/1901 
 
 **Sample Response**
@@ -3317,7 +3446,7 @@ Eg: /getbranchlist/1901
 
 ```
 
-6. **/api/getcipschargelist/MER-1-APP-3:** To get the cips and ips charge slab as per the merchant id that will 
+**6. /api/getcipschargelist/MER-1-APP-3:** To get the cips and ips charge slab as per the merchant id that will 
 be applied to Debtor. Eg. MER-1-APP-3 is for fund transfer. 
 
 **Sample Response:**
@@ -3357,7 +3486,7 @@ be applied to Debtor. Eg. MER-1-APP-3 is for fund transfer.
    }
 ]
 ```
-7. **/api/getacvalidationenabledbanklist :** To get the bank list having account validation features enabled. 
+**7. /api/getacvalidationenabledbanklist :** To get the bank list having account validation features enabled. 
 
 
 **Sample Response:**
@@ -3374,7 +3503,7 @@ be applied to Debtor. Eg. MER-1-APP-3 is for fund transfer.
    }
 ]
 ```
-8. **/api/getreversalenabledbanklist :** To get the bank list having auto reversal feature enabled.
+**8. /api/getreversalenabledbanklist :** To get the bank list having auto reversal feature enabled.
  
 **Sample Response:**
 ```json
@@ -3389,7 +3518,7 @@ be applied to Debtor. Eg. MER-1-APP-3 is for fund transfer.
    }
 ]
 ```
-9. **/api/bank-account/details:** To get the list of added bank accounts for technical NPI members.
+**9. /api/bank-account/details:** To get the list of added bank accounts for technical NPI members.
 
 **Sample Response:**
 ```json
@@ -3422,7 +3551,7 @@ be applied to Debtor. Eg. MER-1-APP-3 is for fund transfer.
    ]
 }
 ```
-10.  **/api/debit-cap/details:** To get the details of debit cap which is assigned to the particular bank of the 
+**10.  /api/debit-cap/details:** To get the details of debit cap which is assigned to the particular bank of the 
 NPI member.
 
 **Sample Response:**
@@ -3449,7 +3578,7 @@ NPI member.
 }
 
 ```
-11. **/api/tp/auto-release/details:** To get details on category purpose and maximum auto-release amount for different banks. This endpoint will return data showing the maximum amount that can be auto-released/debited without any manual intervention required from the NPI member’s debtor bank. This endpoint is 
+ **11. /api/tp/auto-release/details:** To get details on category purpose and maximum auto-release amount for different banks. This endpoint will return data showing the maximum amount that can be auto-released/debited without any manual intervention required from the NPI member’s debtor bank. This endpoint is 
 applicable in the case of non-real-time payment only. 
 
 **Sample Request:**
@@ -3578,8 +3707,7 @@ applicable in the case of non-real-time payment only.
 </table>
    
 
-12.**Balance enquiry**
-
+**12. Balance enquiry**<br/>
 
 The balance enquiry endpoint can be consumed prior to posting payments in either real time or non-real time services. 
 Only technical members whose account(s) are whitelisted by NCHL and whose debit authority has been obtained from 

@@ -16,6 +16,7 @@ and NCHL-IPS supports non-real time transactions. The transaction limits of the 
 shall be applicable in case of transactions initiated from NPI. 
 
 
+
 The overlaying services are added by integrating the service providers like Government institutions, 
 Semi-Government institutions, large corporates, PSPs/ PSOs, alternate channels of BFIs, etc. within 
 NPI. The on-boarded service providers can also be accessed by other service providers through NPI for 

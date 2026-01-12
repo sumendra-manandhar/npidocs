@@ -1,8 +1,8 @@
 ---
-sidebar_position: 9
+sidebar_position: 8
 ---
 
-# 9. Third Party Net Settlement 
+# 8. Third Party Net Settlement 
 
 Third party net settlement is for processing of final settlements for PSO or other institutions through 
 NCHL towards RTGS. Such PSO or other institutions will use this API to initiate their multilateral net 
