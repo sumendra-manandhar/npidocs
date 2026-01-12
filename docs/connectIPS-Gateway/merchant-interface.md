@@ -40,7 +40,7 @@ This section describes the necessary information for integrating merchant e-comm
       <td>2</td>
       <td>APPID</td>
       <td>String </td>
-      <td>20</td>
+      <td>15</td>
       <td>Y</td>
       <td>Unique identification, which will be used to identify the accountdetails of the merchant’s application. A merchant can have multiple applications based on different banks account used for various shopping sites. Application Id will be provided by NCHL after registration.</td>
      </tr>
