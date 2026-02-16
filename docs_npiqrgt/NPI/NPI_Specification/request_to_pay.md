@@ -934,17 +934,9 @@ Payer agent should provide the following response on receiving the request messa
     "token": "<token Signature>" 
  } 
 ```
- 
-**Token String:**
-
-REQUESTTOPAYID:requestToPayId,
-
-ORIGINATORUNIQUEID:originatorUniqueId,
-
-RESPONSECODE:responseCode,
-
-RESPONSEMESSAGE:responseMessage
-
+```json
+Token String=REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,RESPONSECODE:responseCode,RESPONSEMESSAGE:responseMessage
+```
  
 
 ### 9.1.5. Request from Payer Agent to NPI (Financial Messages) 
@@ -1295,7 +1287,7 @@ RESPONSEMESSAGE:responseMessage
 }
 ```
 
-<pre><code parentName="pre"{...{"className":"language-json"}}>{'Token String=“requestToPayId+","+originatorUniqueId+","+acceptedRejectedFlag+","+payBatchId+","+payTxnId+","+debitStatus+","+creditStatus+","+amount+","+senderName+","+payerMessage” '}</code></pre>
+<pre><code parentName="pre"{...{"className":"language-json"}}>{'Token String=requestToPayId+","+originatorUniqueId+","+acceptedRejectedFlag+","+payBatchId+","+payTxnId+","+debitStatus+","+creditStatus+","+amount+","+senderName+","+payerMessage” '}</code></pre>
 
  
 **Sample Response** 
@@ -1311,9 +1303,7 @@ RESPONSEMESSAGE:responseMessage
 ```
 
 
-<pre><code parentName="pre"{...{"className":"language-json"}}>{'Token string:REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,RESPONSECODE:responseCode,RESPONSEMESSAGE:responseMessage '}</code></pre>
-
-
+<pre><code parentName="pre"{...{"className":"language-json"}}>{'Token string=REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,RESPONSECODE:responseCode,RESPONSEMESSAGE:responseMessage '}</code></pre>
 
 ### 9.1.7. Request from NPI to payee agent – Transaction Confirmation 
 
@@ -1502,12 +1492,12 @@ Transaction reports can be generated from the transaction reporting API mentione
     "token": null 
 } 
 ```
-
-**Token String:**
-
-REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,ACCEPTEDREJECTEDFLAG:acc 
+ ```json
+Token String= REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,ACCEPTEDREJECTEDFLAG:acc 
 eptedRejectedFlag,PAYBATCHID:payBatchId,PAYTXNID:payTxnId,DEBITSTATUS:debitStatus,CREDITSTATUS:cre 
 ditStatus,AMOUNT:amount,SENDERNAME:senderName,PAYERMESSAGE:payerMessage 
+```
+
 
 **Sample Response:** 
 ```json
@@ -1520,10 +1510,10 @@ ditStatus,AMOUNT:amount,SENDERNAME:senderName,PAYERMESSAGE:payerMessage
    "token":"qmyw6otF2QZ1fwR8XFPBCa6fhvH/xNpIbep6V8pIHMe/z+RimCGhtjT3+qqnYExlHSFtgs3kNodXn7dmchju+JgFtMyr85AFwiZucAd7GuWj019EnF53TkqYpnjB50aQj23hIgjAg43se7FZCZd6ohWXSjW2kpb7jE9NUcT+D9g\u003d"
 }
 ```
-
-**Token String:**
-REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,RESPONSECODE:responseCode, 
+```json
+Token String= REQUESTTOPAYID:requestToPayId,ORIGINATORUNIQUEID:originatorUniqueId,RESPONSECODE:responseCode, 
 RESPONSEMESSAGE:responseMessage
+```
 
 
 ## 9.2. E-Mandate/Account Tokenization Based R2P
@@ -2689,15 +2679,17 @@ responseCode+”,”+ npiuserId”
 
 ```json
 
-{ 
-"participantId": "MOCO@999", 
-"identifier": "12345", 
-"userIdentifier": "98******769", 
-"mandateToken": "mandatetoken", 
-"cancelReasonCode": "000", 
-"cancelReasonMessage": "SUCCESS",
-"token": "randomToken" 
-} 
+{
+    "responseCode": "000",
+    "responseMessage": "SUCCESS",
+    "participantId": "SIDP1",
+    "identifier": "123",
+    "userIdentifier": "USER123",
+    "mandateToken": "+wQQ7bmysDmb3AYWuxsesjmxEScbZSQR4AZzO01XJ4DzUcmf9lIqB/xV73t8COexRF7diKdcbn6iZq0XBh56uUa+IkVoTXWhSMHzYccmsMQSbe+xy6PUqcEFaBjfV5rC61v91IXaNSnrDQZFgK1oA/nfeW6EFfkRd+4O3rFOrww=",
+    "cancelReasonCode": "INVALID_AC",
+    "cancelReasonMessage": "Invalid Account Number",
+    "token": "oa3oMP/qs6OgeCIqcApX98bK2AMNFLIcDrdLD8FjhO7NHh6YQ9BGKMyrDhJQL6eExPEvCcnPpUFtCGBK6SFZJCCG0QUMeQXQdrSo6xHsqc9Nn/xdOWBj8+BoWgCWCcsJeOzLDt/8Ef93iCPeHPJJztNWpZNcfCZqqtYKUGeFQOk="
+}
 ```
 
 ### 9.2.5. Re-new Token
@@ -2909,9 +2901,98 @@ Token String= participantId+”,” + mandateToken+”,” + NPIUserId”
 </table>
 
 
+### 9.2.6. Verify API
+A verify API is available in NPI to verify the transaction status. 
 
+**POST URL:** /tokenization/verify
 
-### 9.2.6. Exception Handling
+**Request type:**  application/json  
+
+**Request parameters:**
+<table>
+  <thead>
+    <tr>
+      <th>S.N.</th>
+      <th>Parameter</th>
+      <th>Data Type</th>
+      <th>Length</th>
+      <th>Description</th>
+      <th>Presence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>participantId</td>
+      <td>String</td>
+      <td>25</td>
+      <td>Participant id provided to third-party system by NCHL for tokenization service</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>appId</td>
+      <td>String</td>
+      <td>Max. 30</td>
+      <td>App Id registered in connectIPS to whom the payment is being done</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>amount</td>
+      <td>Numeric</td>
+      <td>(8,2)</td>
+      <td>Transaction amount</td>
+      <td>M</td>
+    </tr>
+     <tr>
+      <td>4</td>
+      <td>paymentToken</td>
+      <td>String</td>
+      <td></td>
+      <td>Payment token received from payment staging</td>
+      <td>M</td>
+    </tr>
+     <tr>
+      <td>5</td>
+      <td>token</td>
+      <td>String</td>
+      <td></td>
+      <td>Base64 Signature token generated through signing the token string by NCHL private key. Signature algorithm is SHA256withRSA. UTF-8 is the encoding algorithm.</td>
+      <td>M</td>
+    </tr>
+  </tbody>
+</table>
+
+```json
+Token String= participantId+”,”+ appId +”,”+amount +”,”+paymentToken +”,” + NPIUserId
+```
+
+**Sample Request:**  
+```json
+{
+    "participantId": "SIDP1",
+    "appId": "R2P-884-APP-1",
+    "amount": 10,
+    "paymentToken": "jhUIzrQ6KP0J4SlZwaewp55J1ryrMOn8sQzquoT4O3kBBIOPZ3pKd1D543z3V5LTFH+/+R9nDVR075PhIUyj9CpWuswpkZug4Y1rDKrUjY3mRlx6ZcFhMqUe4JUvrNiCPzbrEwqyOvH7rVITvbkOohWtnbV7EuifVoO5o8lIUpg=",
+    "token": "Xcoj/ptUka3j8ELsIQvA2UYIVE41jjhVzSd7I1oNKQP8dFZX5ZqDLRVHN1L6ZeGPYV3mJ1lrmXyPKYprYvUfBs5O5+cjnNuN+OVOEpDE3/r/VM9eHAmWuqkmESsY6255sqnZtnfPY2mDCpwtGiB0ScwYdoGJhL6eLIUFRA49q/s="
+}
+```
+
+**Sample Response:** 
+
+```json
+{
+    "responseCode": "000",
+    "responseStatus": "PAID",
+    "responseMessage": "Success",
+    "debitReasonDesc": "SUCCESS",
+    "creditReasonDesc": "SUCCESS",
+    "token": "JPD2gSQzryMicWrMoQ1qrpgefp5NI4+09p2mC0EF1Fy41o2YJ8Rk7eAAlPGSgSbSSIJyvbV9GT9sjLIgRUNNCOOI7dWCRqucV9QMnhqPB3M/bD313mArHG7kwKoadfIIGDlhaE0XOypISFC6eJ4k/OKxQatAqOYHnAkNqaVqgds="
+}
+```
+
+### 9.2.7. Exception Handling
 Following exceptions must be handled at the technical member’s end: 
 
 <ol>

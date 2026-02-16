@@ -16,7 +16,7 @@ and actual amount received in the response of lodge bill to be mapped in confirm
 **Post URL: /api/billpayment/confirmbillpay.do (Real Time)**
 
  **: /api/ips/billpayment/confirmbillpay.do (Non-Real Time)**
-
+ 
 **Request Parameters (Real Time)**
 
 ```json

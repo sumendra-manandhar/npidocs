@@ -16,7 +16,7 @@ and actual amount received in the response of lodge bill to be mapped in confirm
 **Post URL: /api/billpayment/confirmbillpay.do (Real Time)**
 
  **: /api/ips/billpayment/confirmbillpay.do (Non-Real Time)**
-
+ 
 **Request Parameters (Real Time)**
 
 ```json
@@ -35,7 +35,7 @@ and actual amount received in the response of lodge bill to be mapped in confirm
     "debtorIdValue": "123456",
     "debtorAddress": "Kathmandu Nepal",
     "debtorPhone": "+977-01-425****",
-    "debtorMobile": "+977-98*******",
+    "debtorMobile": "+977-98********",
     "debtorEmail": "test@test.com"
   },
   "cipsTransactionDetail": {
@@ -69,7 +69,7 @@ and actual amount received in the response of lodge bill to be mapped in confirm
     "debtorIdValue": "123456",
     "debtorAddress": "Kathmandu Nepal",
     "debtorPhone": "+977-01-425****",
-    "debtorMobile": "+977-98*******",
+    "debtorMobile": "+977-98********",
     "debtorEmail": "test@test.com"
     },
     "nchlIpsTransactionDetail": {

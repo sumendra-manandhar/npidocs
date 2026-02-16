@@ -3885,3 +3885,408 @@ the respective bank(s) are allowed to enquire their available balance.
         </tr>
     </table>
 
+**13. Fetch Account Statement**<br/>
+
+Technical NPI members can retrieve account statements using this endpoint. The permissible date range for fetching account statements is governed by the respective bank’s API limitations. Each bank defines its own constraints, including the maximum allowable date range and related parameters.
+
+**POST URL: /api/v1/ac-stmt**
+
+**Request Parameters:**
+<table border="1">
+        <tr>
+            <th>S.No</th>
+            <th>Parameter Name</th>
+            <th>Data Type</th>
+            <th>Length</th>
+            <th>Description</th>
+            <th>Presence</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>bankCode</td>
+            <td>String</td>
+            <td>4</td>
+            <td>4 digit bank code for which the statement is queried.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>fromDate</td>
+            <td>String</td>
+            <td>Max. 10</td>
+            <td>Date from which the statement is to be fetched.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>toDate</td>
+            <td>String</td>
+            <td>Max. 10</td>
+            <td>Date to which the statement is fetched</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>accountNumber</td>
+            <td>String</td>
+            <td>Max. 20</td>
+            <td>Account number for which the statement is to be queried.</td>
+            <td>M</td>
+        </tr>
+    
+    </table>
+
+**Authorization:** Pass bearer token in the authorization.
+
+**Response Parameters:**
+<table border="1">
+        <tr>
+            <th>S.No</th>
+            <th>Parameter Name</th>
+            <th>Data Type</th>
+            <th>Constraint</th>
+            <th>Description</th>
+            <th>Presence</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>timestamp</td>
+            <td>datewithTimestamp</td>
+            <td></td>
+            <td>Timestamp when the account statement is fetched by the NPI member.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>statementResponseCode</td>
+            <td>String</td>
+            <td>Max.3</td>
+            <td>Response Code</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>statementResponseStatus</td>
+            <td>String</td>
+            <td></td>
+            <td>Status of the response (e.g., SUCCESS, FAILED).</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>statementResponseMessage</td>
+            <td>String</td>
+            <td></td>
+            <td>Additional message related to the response.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>statementResponseData</td>
+            <td>Object</td>
+            <td></td>
+            <td>Contains account-level statement details and transaction list.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>accountNumber</td>
+            <td>String</td>
+            <td></td>
+            <td>Account number of the customer.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>accountName</td>
+            <td>String</td>
+            <td>-</td>
+            <td>Name of the account holder.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>branchName</td>
+            <td>String</td>
+            <td></td>
+            <td>Branch name of the account.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>accountType</td>
+            <td>String</td>
+            <td></td>
+            <td>Type of account.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>accountBalance</td>
+            <td>Decimal/String</td>
+            <td></td>
+            <td>Current available account balance.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>interestRate</td>
+            <td>Decimal</td>
+            <td></td>
+            <td>Applicable interest rate of the account.</td>
+            <td>M</td>
+        </tr>
+          <tr>
+            <td>12</td>
+            <td>accountStatus</td>
+            <td>String</td>
+            <td></td>
+            <td>Status code of the account.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>currency</td>
+            <td>String</td>
+            <td>ISO Currency Code</td>
+            <td>Currency of the account (e.g., NPR).</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>bankName</td>
+            <td>String</td>
+            <td></td>
+            <td>Name of the bank.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>bankId</td>
+            <td>String</td>
+            <td></td>
+            <td>Unique identifier of the bank.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>startDate</td>
+            <td>Date</td>
+            <td>Format: yyyy-MM-dd</td>
+            <td>Start date of the statement period.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>endDate</td>
+            <td>Date</td>
+            <td>Format: yyyy-MM-dd</td>
+            <td>End date of the statement period.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>branchId</td>
+            <td>String</td>
+            <td></td>
+            <td>Branch identifier.</td>
+            <td>O</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>statements</td>
+            <td>Arrays</td>
+            <td></td>
+            <td>List of transaction statements within the date range.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>tranDate</td>
+            <td>dateTime</td>
+            <td>Format: yyyy-MM-dd HH:mm:ss</td>
+            <td>Transaction date and time.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>description</td>
+            <td>String</td>
+            <td></td>
+            <td>Transaction description.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>valueDate</td>
+            <td>Date</td>
+            <td>Format: yyyy-MM-dd</td>
+            <td>Value date of the transaction.</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>debit</td>
+            <td>Decimal/String</td>
+            <td></td>
+            <td>Debit amount (if applicable).</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>credit</td>
+            <td>Decimal/String</td>
+            <td></td>
+            <td>Credit amount (if applicable).</td>
+            <td>M</td>
+        </tr>
+        <tr>
+            <td>25</td>
+            <td>tranType</td>
+            <td>String</td>
+            <td>D/C</td>
+            <td>Transaction type (D = Debit, C = Credit).</td>
+            <td>M</td>
+        </tr><tr>
+            <td>26</td>
+            <td>balance</td>
+            <td>Decimal/String</td>
+            <td></td>
+            <td>Available balance after transaction.</td>
+            <td>M</td>
+        </tr><tr>
+            <td>27</td>
+            <td>remarks</td>
+            <td>String</td>
+            <td></td>
+            <td>Additional transaction remarks.</td>
+            <td>O</td>
+        </tr><tr>
+            <td>28</td>
+            <td>chequeNo</td>
+            <td>String</td>
+            <td></td>
+            <td>Cheque number (if applicable).</td>
+            <td>M</td>
+        </tr><tr>
+            <td>29</td>
+            <td>tranId</td>
+            <td>String</td>
+            <td></td>
+            <td>Unique transaction identifier.</td>
+            <td>M</td>
+        </tr><tr>
+            <td>30</td>
+            <td>referenceNo</td>
+            <td>String</td>
+            <td></td>
+            <td>External reference number.</td>
+            <td>M</td>
+        </tr>
+    </table>
+
+**Sample Request:**
+```json
+{
+    "bankCode": "0301",
+    "fromDate": "2025-12-01",
+    "toDate": "2026-01-29",
+    "accountNumber": "0100200000009012"
+}
+
+```
+**Sample Success Response:**
+```json
+{
+    "timestamp": "2026-02-12 08:34:46",
+    "statementResponseCode": "200",
+    "statementResponseStatus": "SUCCESS",
+    "statementResponseMessage": null,
+    "statementResponseData": {
+        "accountNumber": "0100200000009012",
+        "accountName": "PANKAJ KUMAR GAUTAM",
+        "branchName": "-",
+        "accountType": "BaaaMaa Savings",
+        "accountBalance": "117067.25",
+        "interestRate": 4.36,
+        "accountStatus": "0",
+        "currency": "NPR",
+        "bankName": null,
+        "bankId": "0301",
+        "startDate": "2025-12-01",
+        "endDate": "2026-01-29",
+        "branchId": null,
+        "statements": [
+            {
+                "tranDate": "2025-12-01 13:38:00",
+                "description": "KHALT-9851121351",
+                "valueDate": "2025-12-01",
+                "debit": "1000",
+                "credit": null,
+                "tranType": "D",
+                "balance": "68000",
+                "remarks": "FT253350HFK7\\BNK",
+                "chequeNo": "",
+                "tranId": null,
+                "referenceNo": null
+            },
+            {
+                "tranDate": "2025-12-03 18:01:00",
+                "description": "FPQR-BRAMHASTHAN",
+                "valueDate": "2025-12-03",
+                "debit": "3000",
+                "credit": null,
+                "tranType": "D",
+                "balance": "65000",
+                "remarks": "FT25337XH0TP\\BNK",
+                "chequeNo": "",
+                "tranId": null,
+                "referenceNo": null
+            }
+        ]
+    }
+}
+
+```
+
+**Failure Response:**
+
+**Case I:**
+When NPI member is not Technical:
+```json 
+{
+    "responseCode": "E007",
+    "responseStatus": "Unauthorized",
+    "responseMessage": "You are not authorized for this action",
+    "responseData": {},
+    "responseErrors": []
+}
+
+```
+**Case II:**
+When the bank account is not whitelisted:
+```json
+{
+    "responseCode": "E007",
+    "responseStatus": "Unauthorized",
+    "responseMessage": "You are not authorized for this action",
+    "responseData": {},
+    "responseErrors": []
+}
+
+```
+
+**Case III:**
+When the bank has not enabled account statement:
+```json
+{
+    "responseCode": "E007",
+    "responseStatus": "TECHNICAL VALIDATION FAILED",
+    "responseMessage": "Account statement service is not available, please contact your bank.",
+    "responseData": {},
+    "responseErrors": []
+}
+
+```
+
+

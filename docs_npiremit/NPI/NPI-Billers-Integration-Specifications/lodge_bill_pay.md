@@ -266,7 +266,7 @@ be the SHA256withRSA.
     "debtorIdValue": "123456",
     "debtorAddress": "Kathmandu Nepal",
     "debtorPhone": "+977-01-425****",
-    "debtorMobile": "+977-98*******",
+    "debtorMobile": "+977-98********",
     "debtorEmail": "test@test.com"
   },
   "cipsTransactionDetail": {
@@ -281,6 +281,7 @@ be the SHA256withRSA.
 }
 
 ```
+
 
 **Sample Request (Non-Real Time)**
 
@@ -314,7 +315,6 @@ be the SHA256withRSA.
 }
 
 ```
-
 
 Note: Fields to consider during response from Traffic Fine payment service
 
@@ -394,7 +394,7 @@ Note: Fields to consider during response from Traffic Fine payment service
       "debtorIdValue":"123456",
       "debtorAddress":"Kathmandu Nepal",
       "debtorPhone":"+977-01-425****",
-      "debtorMobile":"+977-98*******",
+      "debtorMobile":"+977-98********",
       "debtorEmail":"test@test.com",
       "rcreUserId":null,
       "rcreTime":null,
@@ -491,7 +491,7 @@ Note: Fields to consider during response from Traffic Fine payment service
       "debtorIdValue":"123456",
       "debtorAddress":"Kathmandu Nepal",
       "debtorPhone":"+977-01-425****",
-      "debtorMobile":"+977-98*******",
+      "debtorMobile":"+977-98********",
       "debtorEmail":"test@test.com",
       "rcreUserId":null,
       "rcreTime":null,

@@ -103,7 +103,7 @@ static QR and 12 for Dynamic QR)
      </tr>
       <tr>
       <td>5</td>
-      <td>merchantCategory</td>
+      <td>merchantCategoryCode</td>
       <td>Numeric</td>
       <td>4</td>
       <td>M</td>

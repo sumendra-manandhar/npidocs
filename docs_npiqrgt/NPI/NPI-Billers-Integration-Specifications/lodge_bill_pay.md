@@ -282,6 +282,7 @@ be the SHA256withRSA.
 
 ```
 
+
 **Sample Request (Non-Real Time)**
 
 ```json
@@ -314,7 +315,6 @@ be the SHA256withRSA.
 }
 
 ```
-
 
 Note: Fields to consider during response from Traffic Fine payment service
 

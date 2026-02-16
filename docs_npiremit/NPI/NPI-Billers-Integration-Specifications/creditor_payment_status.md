@@ -90,7 +90,7 @@ Refer ***creditorPaymentDetail*** object in below sample response for the actual
       "debtorName": "Namrata Shrestha",
       "debtorAccount": "0010********0018",
       "debtorPhone": "Namrata Shrestha",
-      "debtorMobile": "+977-98*******",
+      "debtorMobile": "+977-98********",
       "debtorEmail": "test@test.com",
       "rcreTime": "2022-11-11T06:34:44.847+0000",
       "debitStatus": "000",
